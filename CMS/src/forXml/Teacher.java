@@ -27,6 +27,16 @@ public class Teacher {
 		}
 		return false;
 	}
+	public void resetPassword() {
+		String id=getTea_id(), pw;
+		if(id.length()>=6) pw=id.substring(id.length()-6, id.length());
+		else {
+			pw=id;
+			for(int i=6-id.length(); i>0; i--) pw=pw+"0";
+		}
+		setPassword(pw);
+		return ;
+	}
 	
 	public String getName() {
 		return name;

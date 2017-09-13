@@ -35,7 +35,7 @@ public class TeacherDao  {
 		if(p==null) {
 			p=new Teacher();
 			p.setTea_id(tea_id);
-			p.setPassword("000000");
+			p.resetPassword();
 			p.setName("---");
 			s.save(p);
 			flag=true;
@@ -104,6 +104,22 @@ public class TeacherDao  {
 		
 		closeSession(flag);
 		return flag;
+	}
+	
+	public boolean resetPassword(String tea_id, String name) {
+		openSession();
+		
+		boolean flag=false;
+		Teacher p =(Teacher) s.get(Teacher.class, tea_id);
+		if(p!=null)	{
+			if(p.checkName(name)==true) {
+				flag=true;
+				p.resetPassword();
+			}
+		}
+        
+        closeSession(flag);
+        return flag;
 	}
 	
 	public boolean findOne(String tea_id) {

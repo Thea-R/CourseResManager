@@ -32,7 +32,7 @@ public class StudentDao  {
 		if(p==null) {
 			p=new Student();
 			p.setStu_id(stu_id);
-			p.setPassword("000000");
+			p.resetPassword();
 			p.setName("---");
 			s.save(p);
 			flag=true;
@@ -101,6 +101,24 @@ public class StudentDao  {
 		
 		closeSession(flag);
 		return flag;
+	}
+
+	public boolean resetPassword(String stu_id, String name) {
+		openSession();
+		
+		System.out.println("stu_id = "+stu_id+" name = "+name);
+		
+		boolean flag=false;
+		Student p =(Student) s.get(Student.class, stu_id);
+		if(p!=null)	{
+			if(p.checkName(name)==true) {
+				flag=true;
+				p.resetPassword();
+			}
+		}
+        
+        closeSession(flag);
+        return flag;
 	}
 	
 	public boolean findOne(String stu_id) {

@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   
- 	<form name="login" action="/CMS/servlet/checkIdentity" method="post">
+ 	<form name="reset" action="/CMS/servlet/resetPassword" method="post">
  	<div align="center">
 		<table>
 			<tr>
@@ -31,12 +31,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td><input type="text" name="id" size="20"></td>
 			</tr>
 			<tr>
-				<td>密码：</td>
-				<td><input type="password" name="password" size="20" ></td>
+				<td>姓名：</td>
+				<td><input type="text" name="name" size="20"></td>
 			</tr>
 		</table>
-			<input type="submit" name="submit" value="登录">
-			<a href="forgetPassword.jsp"><input type="button" value="忘记密码"></a>
+		<input type="submit" name="submit" value="重置密码">
+		<a href="index.jsp"><input type="button" value="返回"></a>
 	</div>
 	</form>
   
