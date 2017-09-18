@@ -1,14 +1,11 @@
 package forDao;
 
+import forXml.Teacher;
 import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import forXml.Student;
-import forXml.Teacher;
  
 public class TeacherDao  {
 	private SessionFactory sf;

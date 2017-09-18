@@ -5,10 +5,10 @@
  
 <hibernate-mapping package="forXml">
     <class name="Stu_course" table="stu_course">
-        <composite-id>   
-            <key-property name="course_no" column="course_no"></key-property>  
-            <key-property name="stu_id" column="stu_id"></key-property>  
-        </composite-id>  
+        <composite-id name="pkey" class="pkeyStu_course">
+            <key-property name="course_no" column="course_no"></key-property>
+            <key-property name="stu_id" column="stu_id"></key-property>
+        </composite-id>
         <property name="grade" />
         <property name="tea_evaluation" />
     </class>
