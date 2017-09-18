@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping package="forXml">
+    <class name="Course" table="course">
+        <id name="course_no" column="course_no">
+            <generator class="assigned">
+            </generator>
+        </id>
+        <property name="title" />
+        <property name="credit" />
+        <property name="tea_id" />
+    </class>
+     
+</hibernate-mapping>

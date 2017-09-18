@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping package="forXml">
+    <class name="Stu_homework" table="stu_homework">
+        <composite-id>   
+            <key-property name="course_no" column="course_no"></key-property>  
+            <key-property name="stu_id" column="stu_id"></key-property>  
+            <key-property name="homework_no" column="homework_no"></key-property>  
+        </composite-id>  
+        <property name="grade" />
+        <property name="status" />
+        <property name="opinion" />
+    </class>
+     
+</hibernate-mapping>

@@ -6,6 +6,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -22,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  	<jsp:include page="header.jsp" />
   
  	<form name="login" action="/CMS/servlet/checkIdentity" method="post">
  	<div align="center">
@@ -39,31 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<a href="forgetPassword.jsp"><input type="button" value="忘记密码"></a>
 	</div>
 	</form>
-  
-  	<script>
-		function printTime(){
-			var d = new Date();
-			var yyyy=d.getFullYear(), mm=d.getMonth()+1, dd=d.getDate(), day=d.getDay();
-			var h=d.getHours(), m=d.getMinutes(), s=d.getSeconds();
-			
-			if(mm<10) mm="0"+mm;
-			if(dd<10) dd="0"+dd;
-			if(h<10) h="0"+h;
-			if(m<10) m="0"+m;
-			if(s<10) s="0"+s;
-			
-			if(day==1) day="Mon.";
-			else if(day==2) day="Tues.";
-			else if(day==3) day="Wed.";
-			else if(day==4) day="Thurs.";
-			else if(day==5) day="Fri.";
-			else if(day==6) day="Sat.";
-			else day="Sun.";
-			
-			document.getElementById("dt").innerHTML= h+":"+m+":"+s+"<br>"+yyyy+"/"+mm+"/" +dd+" "+day;
-		}
-  		window.setInterval("printTime();",1000);
-	</script>
-	<div id="dt" style="color:grey" align="center"></div>
+	
+  	<jsp:include page = "footer.jsp"/>
   </body>
 </html>

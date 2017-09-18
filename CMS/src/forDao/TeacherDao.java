@@ -174,4 +174,14 @@ public class TeacherDao  {
 
 		closeSession(false);
 	}
+	
+	public List<Teacher> getAll() {
+		openSession();
+		
+		Query query=s.createQuery("from Teacher");
+		List<Teacher> list=query.list();
+		closeSession(false);
+		
+		return list;
+	}
 }

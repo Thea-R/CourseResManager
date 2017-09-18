@@ -173,4 +173,14 @@ public class StudentDao  {
 
 		closeSession(false);
 	}
+	
+	public List<Student> getAll() {
+		openSession();
+		
+		Query query=s.createQuery("from Student");
+		List<Student> list=query.list();
+		closeSession(false);
+		
+		return list;
+	}
 }

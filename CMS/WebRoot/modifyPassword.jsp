@@ -27,20 +27,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	<jsp:include page="header.jsp" />
- 	<form name="reset" action="/CMS/servlet/resetPassword" method="post">
+ 	<form name="modify_adm" action="/CMS/servlet/modifyPassword" method="post">
  	<div align="center">
 		<table>
-			<tr>
-				<td>账号：</td>
-				<td><input type="text" name="id" size="20"></td>
-			</tr>
 			<tr>
 				<td>姓名：</td>
 				<td><input type="text" name="name" size="20"></td>
 			</tr>
+			<tr>
+				<td>旧密码：</td>
+				<td><input type="password" name="old" size="20"></td>
+			</tr>
+			<tr>
+				<td>新密码：</td>
+				<td><input type="password" name="now" size="20"></td>
+			</tr>
 		</table>
-		<input type="submit" name="submit" value="重置密码">
-		<a href="index.jsp"><input type="button" value="返回"></a>
+		<input type="submit" name="submit" value="修改密码">
+		<a href="javascript:history.back(-1)"><input type="button" value="返回"></a>
 	</div>
 	</form>
 	

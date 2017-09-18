@@ -19,7 +19,12 @@
         <property name="hbm2ddl.auto">update</property>
         
         <mapping resource="forXml/Admin.hbm.xml" />
+        <mapping resource="forXml/Course.hbm.xml" />
+        <mapping resource="forXml/Courseware.hbm.xml" />
+        <mapping resource="forXml/Stu_course.hbm.xml" />
+        <mapping resource="forXml/Stu_homework.hbm.xml" />
         <mapping resource="forXml/Student.hbm.xml" />
+        <mapping resource="forXml/Tea_homework.hbm.xml" />
         <mapping resource="forXml/Teacher.hbm.xml" />
     </session-factory>
  

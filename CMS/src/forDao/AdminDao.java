@@ -1,10 +1,12 @@
 package forDao;
 
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
 import forXml.Admin;
  
 public class AdminDao  {
@@ -122,5 +124,15 @@ public class AdminDao  {
 		}
 
 		closeSession(false);
+	}
+	
+	public List<Admin> getAll() {
+		openSession();
+		
+		Query query=s.createQuery("from Admin");
+		List<Admin> list=query.list();
+		closeSession(false);
+		
+		return list;
 	}
 }

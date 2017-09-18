@@ -1,10 +1,14 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -23,6 +27,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  	<jsp:include page="header.jsp" />
+  	
+  	<a href="modifyPassword.jsp"><input type="button" value="修改密码" ></a>
+	<a href="index.jsp"><input type="button" value="登出"></a>
+	<br>
+  	
     This is my JSP page. <br>
+    
+    <jsp:include page="footer.jsp" />
   </body>
 </html>

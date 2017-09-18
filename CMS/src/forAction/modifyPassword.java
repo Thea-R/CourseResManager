@@ -2,15 +2,18 @@ package forAction;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import forDao.*;
 
-public class checkIdentity extends HttpServlet {
-	public checkIdentity() {
+public class modifyPassword extends HttpServlet {
+	public modifyPassword() {
 		super();
 	}
 
@@ -37,34 +40,26 @@ public class checkIdentity extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id=request.getParameter("id");
-		String pw=request.getParameter("password");
-		AdminDao adm=new AdminDao();
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		String nm=request.getParameter("name");
+		String old=request.getParameter("old");
+		String now=request.getParameter("now");
 		StudentDao stu=new StudentDao();
 		TeacherDao tea=new TeacherDao();
 		
 		response.setContentType("text/html;charset=GBK");
 		
-		if(adm.checkOne(id, pw)==true) {
-			HttpSession session=request.getSession();
-			session.setAttribute("id", id);
-			session.setAttribute("identiy", "admin");
-			response.sendRedirect("../mainAdmin.jsp");
+		if(stu.modifyPassword(id, nm, old, now)==true) {
+			String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
+			response.getWriter().println(script);
 		}
-		else if(stu.checkOne(id, pw)==true) {
-			HttpSession session=request.getSession();
-			session.setAttribute("id", id);
-			session.setAttribute("identity", "student");
-			response.sendRedirect("../mainStudent.jsp");
-		}
-		else if(tea.checkOne(id, pw)==true) {
-			HttpSession session=request.getSession();
-			session.setAttribute("id", id);
-			session.setAttribute("identity", "teacher");
-			response.sendRedirect("../mainTeacher.jsp") ;
+		else if(tea.modifyPassword(id, nm, old, now)==true) {
+			String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
+			response.getWriter().println(script);
 		}
 		else {
-			String script = "<script>alert('用户名或密码错误，请重新登陆');location.href='../index.jsp'</script>";
+			String script = "<script>alert('修改失败，请重新输入');location.href='../modifyPassword.jsp'</script>";
 			response.getWriter().println(script);
 		}
 	}
