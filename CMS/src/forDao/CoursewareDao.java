@@ -1,6 +1,11 @@
 package forDao;
 
+import java.util.List;
+
+import forXml.Course;
 import forXml.Courseware;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -73,5 +78,15 @@ public class CoursewareDao {
 		
 		closeSession(false);
 		return p;
+	}
+	
+	public List<Courseware> getAll() {
+		openSession();
+		
+		Query query=s.createQuery("from Courseware");
+		List<Courseware> list=query.list();
+		closeSession(false);
+		
+		return list;
 	}
 }

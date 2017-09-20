@@ -1,8 +1,14 @@
 package forDao;
 
+import forXml.Course;
 import forXml.Stu_course;
+import forXml.Stu_homework;
 import forXml.pkeyStu_course;
+import forXml.pkeyStu_homework;
+
+import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -108,22 +114,88 @@ public class Stu_courseDao {
 	public List<Stu_course> getbyCourse_no(String course_no) {
 		openSession();
 
-        Query query =s.createQuery("from Stu_course p where p.course_no like ?");
-        query.setString(0, "%"+course_no+"%");
-		List<Stu_course> list=query.list();
-		closeSession(false);
+        String sql = "select * from stu_course where course_no ="+course_no;
+        Query query= s.createSQLQuery(sql);
+        List<Object[]> list= query.list();
+        List<Stu_course> ret=new ArrayList<Stu_course>();
+        
+        for (Object[] os : list) {
+        	
+        	int i=0;
+        	Stu_course tmp=new Stu_course();
+        	pkeyStu_course pkey=new pkeyStu_course();
+            for (Object filed: os) {
+            	i++;
+            	if(i==1) pkey.setCourse_no(filed.toString());
+            	else if(i==2) pkey.setStu_id(filed.toString());
+            	else if(i==3 && filed!=null) tmp.setGrade((Double)filed);
+            	else if(i==4 && filed!=null) tmp.setTea_evaluation((Double)filed);
+            }
+            tmp.setPkey(pkey);
+            ret.add(tmp);
+        }
 		
-        return list;
+		closeSession(false);
+        return ret;
 	}
 	
 	public List<Stu_course> getbyStu_id(String stu_id) {
 		openSession();
 
-        Query query =s.createQuery("from Stu_course p where p.stu_id like ?");
-        query.setString(0, "%"+stu_id+"%");
+		String sql = "select * from stu_course where stu_id ="+stu_id;
+        Query query= s.createSQLQuery(sql);
+        List<Object[]> list= query.list();
+        List<Stu_course> ret=new ArrayList<Stu_course>();
+        
+        for (Object[] os : list) {
+        	
+        	int i=0;
+        	Stu_course tmp=new Stu_course();
+        	pkeyStu_course pkey=new pkeyStu_course();
+            for (Object filed: os) {
+            	i++;
+            	if(i==1) pkey.setCourse_no(filed.toString());
+            	else if(i==2) pkey.setStu_id(filed.toString());
+            	else if(i==3 && filed!=null) tmp.setGrade((Double)filed);
+            	else if(i==4 && filed!=null) tmp.setTea_evaluation((Double)filed);
+            }
+            tmp.setPkey(pkey);
+            ret.add(tmp);
+        }
+
+		closeSession(false);		
+        return ret;
+	}
+	
+	public Stu_course getbyPkey(pkeyStu_course pkey) {
+		openSession();
+		
+		Stu_course p=(Stu_course) s.get(Stu_course.class, pkey);
+		
+		closeSession(false);
+		return p;
+	}
+	
+	public List<Stu_course> getAll() {
+		openSession();
+		
+		Query query=s.createQuery("from Stu_course");
 		List<Stu_course> list=query.list();
 		closeSession(false);
 		
-        return list;
+		return list;
+	}
+	
+	public String getTitlebyNo(String course_no) {
+		openSession();
+		
+		Course p=(Course) s.get(Course.class, course_no);
+		String title=new String();
+		if(p!=null) {
+			title=p.getTitle();
+		}
+		
+		closeSession(false);
+		return title;
 	}
 }

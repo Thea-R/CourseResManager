@@ -1,7 +1,9 @@
 package forDao;
 
 import forXml.Course;
+
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,7 +26,7 @@ public class CourseDao {
         sf.close();
 	}
 	
-	public boolean addOne(String course_no, String title, Double credit, String tea_id) {
+	public boolean addOne(String course_no, String title, String tea_id) {
 		openSession();
 		
 		boolean flag=false;
@@ -33,7 +35,6 @@ public class CourseDao {
 			p=new Course();
 			p.setCourse_no(course_no);
 			p.setTitle(title);
-			p.setCredit(credit);
 			p.setTea_id(tea_id);
 			s.save(p);
 			flag=true;
@@ -80,7 +81,6 @@ public class CourseDao {
 		return list;
 	}
 	
-	
 	public Course getbyCourse_no(String course_no) {
 		openSession();
 
@@ -93,8 +93,8 @@ public class CourseDao {
 	public List<Course> getbyTitle(String title) {
 		openSession();
 
-        Query query =s.createQuery("from Course p where p.title like ?");
-        query.setString(0, "%"+title+"%");
+        Query query =s.createQuery("from Course where title = ?");
+        query.setString(0, title);
 		List<Course> list=query.list();
 		closeSession(false);
 		
@@ -104,11 +104,24 @@ public class CourseDao {
 	public List<Course> getbyTea_id(String tea_id) {
 		openSession();
 
-        Query query =s.createQuery("from Course p where p.tea_id like ?");
-        query.setString(0, "%"+tea_id+"%");
+        Query query =s.createQuery("from Course where tea_id = ?");
+        query.setString(0, tea_id);
 		List<Course> list=query.list();
 		closeSession(false);
 		
         return list;
+	}
+	
+	public String getTitlebyNo(String course_no) {
+		openSession();
+		
+		Course p=(Course) s.get(Course.class, course_no);
+		String title=new String();
+		if(p!=null) {
+			title=p.getTitle();
+		}
+		
+		closeSession(false);
+		return title;
 	}
 }

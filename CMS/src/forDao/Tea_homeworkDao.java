@@ -1,8 +1,14 @@
 package forDao;
 
+import forXml.Course;
+import forXml.Stu_course;
 import forXml.Tea_homework;
+import forXml.pkeyStu_course;
 import forXml.pkeyTea_homework;
+
+import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -68,11 +74,36 @@ public class Tea_homeworkDao {
 	public List<Tea_homework> getbyCourse_no(String course_no) {
 		openSession();
 
-        Query query =s.createQuery("from Tea_homework p where p.course_no like ?");
-        query.setString(0, "%"+course_no+"%");
+		String sql = "select * from tea_homework where course_no ="+course_no;
+        Query query= s.createSQLQuery(sql);
+        List<Object[]> list= query.list();
+        List<Tea_homework> ret=new ArrayList<Tea_homework>();
+        
+        for (Object[] os : list) {
+        	
+        	int i=0;
+        	Tea_homework tmp=new Tea_homework();
+        	pkeyTea_homework pkey=new pkeyTea_homework();
+            for (Object filed: os) {
+            	i++;
+            	if(i==1) pkey.setCourse_no(filed.toString());
+            	else if(i==2) pkey.setHomework_no(filed.toString());
+            }
+            tmp.setPkey(pkey);
+            ret.add(tmp);
+        }
+		
+		closeSession(false);
+        return ret;
+	}
+	
+	public List<Tea_homework> getAll() {
+		openSession();
+		
+		Query query=s.createQuery("from Tea_homework");
 		List<Tea_homework> list=query.list();
 		closeSession(false);
 		
-        return list;
+		return list;
 	}
 }

@@ -3,8 +3,7 @@ package forXml;
 public class Stu_homework {
 	pkeyStu_homework pkey;
 	String opinion;
-	double grade;
-	boolean status;
+	Boolean status;
 	
 	public pkeyStu_homework getPkey() {
 		return pkey;
@@ -14,11 +13,7 @@ public class Stu_homework {
 		return opinion;
 	}
 	
-	public double getGrade() {
-		return grade;
-	}
-	
-	public boolean getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
 	
@@ -30,11 +25,7 @@ public class Stu_homework {
 		this.opinion=opinion;
 	}
 	
-	public void setGrade(double grade) {
-		this.grade=grade;
-	}
-	
-	public void setStatus(boolean status) {
+	public void setStatus(Boolean status) {
 		this.status=status;
 	}
 }

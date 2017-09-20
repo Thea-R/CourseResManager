@@ -48,7 +48,7 @@ public class checkIdentity extends HttpServlet {
 		if(adm.checkOne(id, pw)==true) {
 			HttpSession session=request.getSession();
 			session.setAttribute("id", id);
-			session.setAttribute("identiy", "admin");
+			session.setAttribute("identity", "admin");
 			response.sendRedirect("../mainAdmin.jsp");
 		}
 		else if(stu.checkOne(id, pw)==true) {

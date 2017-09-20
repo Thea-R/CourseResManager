@@ -42,7 +42,7 @@ public class TeacherDao  {
 		return flag;
 	}
 	
-	public boolean addOne(String tea_id, String name) {
+	public boolean addOne(String tea_id, String name, String password) {
 		openSession();
 		
 		boolean flag=false;
@@ -50,7 +50,7 @@ public class TeacherDao  {
 		if(p==null) {
 			p=new Teacher();
 			p.setTea_id(tea_id);
-			p.setPassword("000000");
+			p.setPassword(password);
 			p.setName(name);
 			s.save(p);
 			flag=true;
@@ -88,13 +88,13 @@ public class TeacherDao  {
 		return flag;
 	}
 	
-	public boolean modifyPassword(String tea_id, String name, String old, String _new) {
+	public boolean modifyPassword(String tea_id, String old, String _new) {
 		openSession();
 		
 		boolean flag=false;
 		Teacher p=(Teacher) s.get(Teacher.class, tea_id);
 		if(p!=null) {
-			if(p.modifyPassword(name, old, _new)==true) {
+			if(p.modifyPassword(old, _new)==true) {
 				flag=true;
 			}
 		}
@@ -147,15 +147,13 @@ public class TeacherDao  {
         return flag;
 	}
 	
-	public void getbyId(String tea_id) {
+	public Teacher getbyId(String tea_id) {
 		openSession();
 		
 		Teacher p =(Teacher) s.get(Teacher.class, tea_id);
-		if(p!=null)	{
-			System.out.println("tea_id = "+p.getTea_id()+" , name = "+p.getName()+" , password = "+p.getPassword());
-		}
-        
+
         closeSession(false);
+        return p;
 	}
 	
 	public void showAll() {

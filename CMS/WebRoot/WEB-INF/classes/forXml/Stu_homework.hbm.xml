@@ -11,7 +11,6 @@
             <key-property name="homework_no" column="homework_no"></key-property>  
         </composite-id>
         
-        <property name="grade" />
         <property name="status" />
         <property name="opinion" />
     </class>

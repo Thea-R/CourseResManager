@@ -2,7 +2,6 @@ package forXml;
 
 public class Course {
 	String course_no, title, tea_id;
-	Double credit;
 	
 	public String getCourse_no() {
 		return course_no;
@@ -16,10 +15,6 @@ public class Course {
 		return tea_id;
 	}
 	
-	public Double getCredit() {
-		return credit;
-	}
-	
 	public void setCourse_no(String course_no) {
 		this.course_no=course_no;
 	}
@@ -30,9 +25,5 @@ public class Course {
 	
 	public void setTea_id(String tea_id) {
 		this.tea_id=tea_id;
-	}
-	
-	public void setCredit(Double credit) {
-		this.credit=credit;
 	}
 }

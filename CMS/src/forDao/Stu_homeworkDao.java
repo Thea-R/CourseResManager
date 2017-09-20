@@ -1,8 +1,12 @@
 package forDao;
 
 import forXml.Stu_homework;
+import forXml.Tea_homework;
 import forXml.pkeyStu_homework;
+
+import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -67,27 +71,6 @@ public class Stu_homeworkDao {
 		return flag;
 	}
 	
-	public boolean modifyGrade(String course_no, String stu_id, String homework_no, Double grade) {
-		openSession();
-		
-		boolean flag=false;
-		
-		pkeyStu_homework pkey=new pkeyStu_homework();
-		pkey.setCourse_no(course_no);
-		pkey.setStu_id(stu_id);
-		pkey.setHomework_no(homework_no);
-		
-		Stu_homework p=(Stu_homework) s.get(Stu_homework.class, pkey);
-		if(p!=null) {
-			p.setGrade(grade);
-			s.save(p);
-			flag=true;
-		}
-		
-		closeSession(flag);
-		return flag;
-	}
-	
 	public boolean modifyStatus(String course_no, String stu_id, String homework_no, boolean status) {
 		openSession();
 		
@@ -133,22 +116,68 @@ public class Stu_homeworkDao {
 	public List<Stu_homework> getbyCourse_no(String course_no) {
 		openSession();
 
-        Query query =s.createQuery("from Stu_homework p where p.course_no like ?");
-        query.setString(0, "%"+course_no+"%");
-		List<Stu_homework> list=query.list();
-		closeSession(false);
+		String sql = "select * from stu_homework where course_no ="+course_no;
+        Query query= s.createSQLQuery(sql);
+        List<Object[]> list= query.list();
+        List<Stu_homework> ret=new ArrayList<Stu_homework>();
+        
+        for (Object[] os : list) {
+        	
+        	int i=0;
+        	Stu_homework tmp=new Stu_homework();
+        	pkeyStu_homework pkey=new pkeyStu_homework();
+            for (Object filed: os) {
+            	i++;
+            	if(i==1) pkey.setCourse_no(filed.toString());
+            	else if(i==2) pkey.setStu_id(filed.toString());
+            	else if(i==3) pkey.setHomework_no(filed.toString());
+            	else if(i==4) tmp.setStatus((Boolean)filed);
+            	else if(filed!=null) tmp.setOpinion(filed.toString());
+            }
+            tmp.setPkey(pkey);
+            ret.add(tmp);
+        }
 		
-        return list;
+		closeSession(false);
+        return ret;
 	}
 	
 	public List<Stu_homework> getbyStu_id(String stu_id) {
 		openSession();
 
-        Query query =s.createQuery("from Stu_homework p where stu_id like ?");
-        query.setString(0, "%"+stu_id+"%");
+		String sql = "select * from stu_homework where stu_id ="+stu_id;
+        Query query= s.createSQLQuery(sql);
+        List<Object[]> list= query.list();
+        List<Stu_homework> ret=new ArrayList<Stu_homework>();
+        
+        for (Object[] os : list) {
+        	
+        	int i=0;
+        	Stu_homework tmp=new Stu_homework();
+        	pkeyStu_homework pkey=new pkeyStu_homework();
+            for (Object filed: os) {
+            	i++;
+            	if(i==1) pkey.setCourse_no(filed.toString());
+            	else if(i==2) pkey.setStu_id(filed.toString());
+            	else if(i==3) pkey.setHomework_no(filed.toString());
+            	else if(i==4) tmp.setStatus((Boolean)filed);
+            	else if(filed!=null) tmp.setOpinion(filed.toString());
+            }
+            tmp.setPkey(pkey);
+            ret.add(tmp);
+        }
+		
+		closeSession(false);
+        return ret;
+	}
+	
+	public List<Stu_homework> getAll() {
+		openSession();
+		
+		Query query=s.createQuery("from Stu_homework");
 		List<Stu_homework> list=query.list();
 		closeSession(false);
 		
-        return list;
+		return list;
 	}
 }

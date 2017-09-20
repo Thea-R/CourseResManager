@@ -22,7 +22,7 @@ public class Admin {
 	}
 	public boolean modifyPassword(String old, String _new) {
 		if(checkPassword(old)==true) {
-			password=_new;
+			setPassword(_new);
 			return true;
 		}
 		return false;

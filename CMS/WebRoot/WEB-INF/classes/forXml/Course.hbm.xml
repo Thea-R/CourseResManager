@@ -10,7 +10,6 @@
             </generator>
         </id>
         <property name="title" />
-        <property name="credit" />
         <property name="tea_id" />
     </class>
      

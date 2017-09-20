@@ -20,20 +20,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	<meta http-equiv="pragma" content="no-cache"> 
+    <meta http-equiv="cache-control" content="no-cache"> 
+    <meta http-equiv="expires" content="0">   
+    
   </head>
   
   <body>
   	<jsp:include page="header.jsp" />
- 	<form name="modify_adm" action="/CMS/servlet/modifyPassword" method="post">
+  	<jsp:include page="filterAll.jsp" />
+  	
+ 	<form name="modify" action="/CMS/servlet/modifyPassword" method="post">
  	<div align="center">
 		<table>
-			<tr>
-				<td>姓名：</td>
-				<td><input type="text" name="name" size="20"></td>
-			</tr>
 			<tr>
 				<td>旧密码：</td>
 				<td><input type="password" name="old" size="20"></td>

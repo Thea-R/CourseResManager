@@ -1,9 +1,9 @@
 package forTest;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import java.util.List;
+
 import forDao.*;
+import forXml.*;
 
 public class testHibernate {
 	static void testAdmin() {
@@ -86,9 +86,132 @@ public class testHibernate {
 		return ;
 	}
 	
+	static void testCourse() {
+		CourseDao dao=new CourseDao();
+		/*
+		dao.addOne("course001", "语文", "2001");
+		dao.addOne("course002", "语文", "2002");
+		dao.addOne("course003", "数学", "2001");
+		dao.addOne("course004", "数学", "2003");
+		dao.addOne("course005", "英语", "2002");
+		dao.addOne("course006", "英语", "2003");
+		
+		List<Course> list=dao.getAll();
+		for(int i=0; i<list.size(); i++) {
+			Course tmp=list.get(i);
+			System.out.println("no="+tmp.getCourse_no()+" title="+tmp.getTitle()+" tea_id="+tmp.getTea_id());
+		}
+		*/
+		return ;
+	}
+	
+	static void testCourseware() {
+		CoursewareDao dao=new CoursewareDao();
+		/*
+		dao.addOne("course001", "语文课件_赵甲");
+		dao.addOne("course002", "语文课件_钱乙");
+		dao.addOne("course003", "数学课件_赵甲");
+		dao.addOne("course004", "数学课件_孙丙");
+		dao.addOne("course005", "英语课件_钱乙");
+		dao.addOne("course006", "英语课件_孙丙");
+		
+		List<Courseware> list=dao.getAll();
+		for(int i=0; i<list.size(); i++) {
+			Courseware tmp=list.get(i);
+			System.out.println("no="+tmp.getCourse_no()+" file_title="+tmp.getFile_title());
+		}
+		*/
+		return ;
+	}
+	
+	static void testTea_homework() {
+		Tea_homeworkDao dao=new Tea_homeworkDao();
+		/*
+		dao.addOne("course001", "hwk0001");
+		dao.addOne("course002", "hwk0002");
+		dao.addOne("course003", "hwk0003");
+		dao.addOne("course003", "hwk0004");
+		dao.addOne("course004", "hwk0005");
+		dao.addOne("course004", "hwk0006");
+		dao.addOne("course005", "hwk0007");
+		dao.addOne("course006", "hwk0008");
+		
+		List<Tea_homework> list=dao.getAll();
+		for(int i=0; i<list.size(); i++) {
+			pkeyTea_homework tmp=list.get(i).getPkey();
+			System.out.println("no="+tmp.getCourse_no()+" homework_no="+tmp.getHomework_no());
+		}
+		*/
+		return ;
+	}
+	
+	static void testStu_course() {
+		Stu_courseDao dao=new Stu_courseDao();
+		
+		/*
+		dao.addOne("course001", "1001");
+		dao.addOne("course004", "1001");
+		dao.addOne("course005", "1001");
+		dao.addOne("course001", "1002");
+		dao.addOne("course003", "1002");
+		dao.addOne("course006", "1002");
+		dao.addOne("course002", "1003");
+		dao.addOne("course004", "1003");
+		dao.addOne("course006", "1003");
+		*/
+		
+		/*
+		List<Stu_course> list=dao.getbyStu_id("1001");
+		for(int i=0; i<list.size(); i++) {
+			Stu_course tmp=list.get(i);
+			pkeyStu_course pkey=tmp.getPkey();
+			System.out.println("no="+pkey.getCourse_no()+" id="+pkey.getStu_id()+" grade="+tmp.getGrade()+" eva="+tmp.getTea_evaluation());
+		}
+		*/
+		return ;
+	}
+	
+	static void testStu_homework() {
+		Stu_homeworkDao dao=new Stu_homeworkDao();
+		/*
+		dao.addOne("course001", "hwk0001", "1001");
+		dao.addOne("course001", "hwk0001", "1002");
+		dao.addOne("course002", "hwk0002", "1003");
+		dao.addOne("course003", "hwk0003", "1002");
+		dao.addOne("course003", "hwk0004", "1002");
+		dao.addOne("course004", "hwk0005", "1001");
+		dao.addOne("course004", "hwk0005", "1003");
+		dao.addOne("course004", "hwk0006", "1001");
+		dao.addOne("course004", "hwk0006", "1003");
+		dao.addOne("course005", "hwk0007", "1001");
+		dao.addOne("course006", "hwk0008", "1002");
+		dao.addOne("course006", "hwk0008", "1003");
+		
+		List<Stu_homework> list=dao.getAll();
+		for(int i=0; i<list.size(); i++) {
+			Stu_homework tmp=list.get(i);
+			pkeyStu_homework pkey=tmp.getPkey();
+			System.out.println("no="+pkey.getCourse_no()+" id="+pkey.getStu_id()+" hmk="+pkey.getHomework_no()+" status="+tmp.getStatus()+" opinion="+tmp.getOpinion());
+		}
+		
+		List<Stu_homework> list=dao.getbyStu_id("1001"); 
+			for(int i=0; i<list.size(); i++) {
+				Stu_homework tmp=list.get(i);
+				pkeyStu_homework pkey=tmp.getPkey();
+				System.out.println("no="+pkey.getCourse_no()+" id="+pkey.getStu_id()+" hmk="+pkey.getHomework_no()+" status="+tmp.getStatus()+" opinion="+tmp.getOpinion());
+			}
+		*/
+		return ;
+	}
+	
 	static public void main(String args[]) {
 		//testAdmin();
 		//testStudent();
 		//testTeacher();
+		//testCourse();
+		//testCourseware();
+		//testTea_homework();
+		//testStu_course();
+		//testStu_homework();
 	}
 }

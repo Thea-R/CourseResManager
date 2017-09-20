@@ -42,15 +42,16 @@ public class StudentDao  {
 		return flag;
 	}
 	
-	public boolean addOne(String stu_id, String name) {
+	public boolean addOne(String stu_id, String name, String password) {
 		openSession();
 		
 		boolean flag=false;
 		Student p=(Student) s.get(Student.class, stu_id);
 		if(p==null) {
+			System.out.println("into!");
 			p=new Student();
 			p.setStu_id(stu_id);
-			p.setPassword("000000");
+			p.setPassword(password);
 			p.setName(name);
 			s.save(p);
 			flag=true;
@@ -88,13 +89,13 @@ public class StudentDao  {
 		return flag;
 	}
 	
-	public boolean modifyPassword(String stu_id, String name, String old, String _new) {
+	public boolean modifyPassword(String stu_id, String old, String _new) {
 		openSession();
 		
 		boolean flag=false;
 		Student p=(Student) s.get(Student.class, stu_id);
 		if(p!=null) {
-			if(p.modifyPassword(name, old, _new)==true) {
+			if(p.modifyPassword(old, _new)==true) {
 				flag=true;
 			}
 		}
@@ -149,15 +150,13 @@ public class StudentDao  {
         return flag;
 	}
 	
-	public void getbyId(String stu_id) {
+	public Student getbyId(String stu_id) {
 		openSession();
 		
 		Student p =(Student) s.get(Student.class, stu_id);
-		if(p!=null)	{
-			System.out.println("stu_id = "+p.getStu_id()+" , name = "+p.getName()+" , password = "+p.getPassword());
-		}
-        
+		
         closeSession(false);
+        return p;
 	}
 	
 	public void showAll() {

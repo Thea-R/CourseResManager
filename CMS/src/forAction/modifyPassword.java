@@ -1,16 +1,14 @@
 package forAction;
 
+import forDao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import forDao.*;
 
 public class modifyPassword extends HttpServlet {
 	public modifyPassword() {
@@ -42,19 +40,23 @@ public class modifyPassword extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		String nm=request.getParameter("name");
 		String old=request.getParameter("old");
 		String now=request.getParameter("now");
+		AdminDao adm=new AdminDao();
 		StudentDao stu=new StudentDao();
 		TeacherDao tea=new TeacherDao();
 		
 		response.setContentType("text/html;charset=GBK");
 		
-		if(stu.modifyPassword(id, nm, old, now)==true) {
+		if(adm.modifyPassword(id, old, now)) {
 			String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
 			response.getWriter().println(script);
 		}
-		else if(tea.modifyPassword(id, nm, old, now)==true) {
+		else if(stu.modifyPassword(id, old, now)==true) {
+			String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
+			response.getWriter().println(script);
+		}
+		else if(tea.modifyPassword(id, old, now)==true) {
 			String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
 			response.getWriter().println(script);
 		}

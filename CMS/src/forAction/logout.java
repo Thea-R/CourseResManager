@@ -39,7 +39,12 @@ public class logout extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session=request.getSession();
+		session.removeAttribute("id");
+		session.removeAttribute("identity");
+		
 		String script = "<script>alert('已登出当前账户，请重新登陆');location.href='../index.jsp'</script>";
+		response.setContentType("text/html;charset=GBK");
 		response.getWriter().println(script);
 		return ;
 	}

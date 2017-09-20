@@ -20,8 +20,8 @@ public class Student {
 		if(this.password.equals(password)) return true;
 		return false;
 	}
-	public boolean modifyPassword(String name, String old, String _new) {
-		if(checkPassword(old)==true && checkName(name)==true) {
+	public boolean modifyPassword(String old, String _new) {
+		if(checkPassword(old)==true) {
 			setPassword(_new);
 			return true;
 		}

@@ -31,19 +31,27 @@
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>modifyPassword_adm</servlet-name>
-    <servlet-class>forAction.modifyPassword_adm</servlet-class>
+    <servlet-name>modifyPassword</servlet-name>
+    <servlet-class>forAction.modifyPassword</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>modifyPassword</servlet-name>
-    <servlet-class>forAction.modifyPassword</servlet-class>
+    <servlet-name>showStu_course</servlet-name>
+    <servlet-class>forAction.showStu_course</servlet-class>
   </servlet>
-
-
-
-
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>stuManage</servlet-name>
+    <servlet-class>forAction.stuManage</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>teaManage</servlet-name>
+    <servlet-class>forAction.teaManage</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>checkIdentity</servlet-name>
@@ -62,12 +70,20 @@
     <url-pattern>/servlet/admManage</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>modifyPassword_adm</servlet-name>
-    <url-pattern>/servlet/modifyPassword_adm</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>modifyPassword</servlet-name>
     <url-pattern>/servlet/modifyPassword</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>showStu_course</servlet-name>
+    <url-pattern>/servlet/showStu_course</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>stuManage</servlet-name>
+    <url-pattern>/servlet/stuManage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>teaManage</servlet-name>
+    <url-pattern>/servlet/teaManage</url-pattern>
   </servlet-mapping>
 
 </web-app>
