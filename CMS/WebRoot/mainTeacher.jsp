@@ -42,7 +42,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		List<Course> list=course.getbyTea_id(tea_id);
 	%>
 	
-	<a href="modifyPassword.jsp"><input type="button" value="修改密码" ></a>
 	<form name="logout" action="/CMS/servlet/logout" method="post">
 		<input type="submit" name="lgo" value="登出">
 	</form>
@@ -53,9 +52,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<li class="active"><a href="#course" data-toggle="tab">已开课程</a></li>
    		<li><a href="#homework" data-toggle="tab">作业情况</a></li>
    		<li><a href="#inform" data-toggle="tab">教学通告</a></li>
+   		<li><a href="#modify_self" data-toggle="tab">修改密码</a></li>
 	</ul>
 	
-	<form name="adm_manage" action="/CMS/servlet/stuManage" method="post">
+	<form name="tea_manage" action="/CMS/servlet/teaManage" method="post">
 	<div id="myTabContent" class="tab-content">
    		<div class="tab-pane fade in active" id="course">
 			<table width="600px">
@@ -72,8 +72,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td><input type="button" name="upl" value="上传课件"></td>
 				<td><input type="button" value="下载课件"></td>
 			</tr>
-		<%}%>
-	</table>
+			<%}%>
+			</table>
    		</div>
    		
    		<div class="tab-pane fade" id="homework">
@@ -83,8 +83,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<div class="tab-pane fade" id="inform">
    			<p>to be completed..</p>
    		</div>
+   		
+   		<div class="tab-pane fade" id="modify_self">
+			<table>
+			<tr>
+				<td>旧密码：</td>
+				<td><input type="password" name="old" size="20"></td>
+			</tr>
+			<tr>
+				<td>新密码：</td>
+				<td><input type="password" name="now" size="20"></td>
+			</tr>
+			</table>
+			<input type="submit" name="modify_self" value="修改密码">
+   		</div>
 	</div>
 	</form>
+	
     <jsp:include page="footer.jsp" />
   </body>
 </html>

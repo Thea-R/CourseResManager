@@ -47,7 +47,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<br>
 	
-	<a href="modifyPassword.jsp"><input type="button" value="修改密码" ></a>
 	<form name="logout" action="/CMS/servlet/logout" method="post">
 		<input type="submit" name="lgo" value="登出">
 	</form>
@@ -59,6 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<li class="active"><a href="#listAll" data-toggle="tab">所有账户</a></li>
    		<li><a href="#listStu" data-toggle="tab">学生列表</a></li>
    		<li><a href="#listTea" data-toggle="tab">教师列表</a></li>
+   		<li><a href="#modify_self" data-toggle="tab">修改密码</a></li>
 	</ul>
 	
 	<form name="adm_manage" action="/CMS/servlet/admManage" method="post">
@@ -87,17 +87,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<%for(int i=0; i<stul.size(); i++) {
 						Student tmp=stul.get(i);%>
 				<tr>
-					<td><input type="text" readonly="readonly" name="modify_id" value=<%=tmp.getStu_id() %>></td>
-					<td><input type="text" name="modify_nm" value=<%=tmp.getName() %>></td>
-					<td><input type="text" name="modify_pw" value=<%=tmp.getPassword() %>></td>
-					<td><input type="submit" name="modify_stu" value="修改"></td>
-					<td><input type="submit" name="delete_stu" value="删除"></td>
+					<td><%=tmp.getStu_id() %></td>
+					<td><input type="text" name="snm<%=i %>" value=<%=tmp.getName() %>></td>
+					<td><input type="text" name="spw<%=i %>" value=<%=tmp.getPassword() %>></td>
+					<td><input type="submit" name="smod<%=i %>" value="修改"></td>
+					<td><input type="submit" name="sdel<%=i %>" value="删除"></td>
 				</tr>
-				<%}%>
-				
+				<%}%>				
 				<tr>
-					<td><input name="adds_id" type="text"></td><td><input name="adds_nm" type="text"></td>
-					<td><input name="adds_pw" type="text"></td><td><input name="add_stu" type="submit" value="添加"></td>
+					<td><input name="sid_add" type="text"></td><td><input name="snm_add" type="text"></td>
+					<td><input name="spw_add" type="password"></td><td><input name="sadd" type="submit" value="添加"></td>
 				</tr>
 			</table>
    		</div>
@@ -108,19 +107,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<%for(int i=0; i<teal.size(); i++) {
 						Teacher tmp=teal.get(i);%>
 				<tr>
-					<td><input type="text" readonly="readonly" name="modify_id" value=<%=tmp.getTea_id() %>></td>
-					<td><input type="text" name="modify_nm" value=<%=tmp.getName() %>></td>
-					<td><input type="text" name="modify_pw" value=<%=tmp.getPassword() %>></td>
-					<td><input type="submit" name="modify_tea" value="修改"></td>
-					<td><input type="submit" name="delete_tea" value="删除"></td>
+					<td><%=tmp.getTea_id() %></td>
+					<td><input type="text" name="tnm<%=i %>" value=<%=tmp.getName() %>></td>
+					<td><input type="text" name="tpw<%=i %>" value=<%=tmp.getPassword() %>></td>
+					<td><input type="submit" name="tmod<%=i %>" value="修改"></td>
+					<td><input type="submit" name="tdel<%=i %>" value="删除"></td>
 				</tr>
 				<%}%>
-				
 				<tr>
-					<td><input name="addt_id" type="text"></td><td><input name="addt_nm" type="text"></td>
-					<td><input name="addt_pw" type="text"></td><td><input name="add_tea" type="submit" value="添加"></td>
+					<td><input name="tid_add" type="text"></td><td><input name="tnm_add" type="text"></td>
+					<td><input name="tpw_add" type="text"></td><td><input name="tadd" type="submit" value="添加"></td>
 				</tr>
 			</table>
+   		</div>
+   		
+   		<div class="tab-pane fade" id="modify_self">
+			<table>
+			<tr>
+				<td>旧密码：</td>
+				<td><input type="password" name="old" size="20"></td>
+			</tr>
+			<tr>
+				<td>新密码：</td>
+				<td><input type="password" name="now" size="20"></td>
+			</tr>
+			</table>
+			<input type="submit" name="modify_self" value="修改密码">
    		</div>
 	</div>
 	</form>

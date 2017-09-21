@@ -2,6 +2,8 @@ package forAction;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.*;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,87 +26,40 @@ public class admManage extends HttpServlet {
 		super.destroy(); 
 	}
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 	public void doAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StudentDao stu=new StudentDao();
 		TeacherDao tea=new TeacherDao();
 		
-		String add_stu=request.getParameter("add_stu");
-		String add_tea=request.getParameter("add_tea");
-		if(add_stu!=null) {
-			String adds_id=request.getParameter("adds_id");
-			String adds_nm=request.getParameter("adds_nm");
-			String adds_pw=request.getParameter("adds_pw");
+		String sadd=request.getParameter("sadd");
+		String tadd=request.getParameter("tadd");
+		if(sadd!=null) {
+			String sid=request.getParameter("sid_add");
+			String snm=request.getParameter("snm_add");
+			String spw=request.getParameter("spw_add");
 			
-			System.out.println(adds_id+" "+adds_nm+" "+adds_pw);
-			if(adds_id.length()==0 || adds_nm.length()==0 || adds_pw.length()==0) {
-				String script = "<script>alert('信息不完整，请重新输入');location.href='../mainAdmin.jsp'</script>";
-				response.getWriter().println(script);
-			}
-			else {
-				if(stu.findOne(adds_id)==true || tea.findOne(adds_id)==true) {
-					String script = "<script>alert('帐号冲突，请重新输入');location.href='../mainAdmin.jsp'</script>";
-					response.getWriter().println(script);
-				}
-				else {
-					
-					if(stu.addOne(adds_id, adds_nm, adds_pw)==true) {
-						String script = "<script>alert('添加学生帐号成功');location.href='../mainAdmin.jsp'</script>";
-						response.getWriter().println(script);
-					}
-					else {
-						System.out.println("no ???");
-						String script = "<script>alert('添加帐号失败？？？');location.href='../mainAdmin.jsp'</script>";
-						response.getWriter().println(script);
-					}
-				}
-			}
+			String script=new String();
+			if(sid.length()==0 || snm.length()==0 || spw.length()==0) script = "<script>alert('信息不完整，请重新输入');location.href='../mainAdmin.jsp'</script>";
+			else if(stu.findOne(sid)==true || tea.findOne(sid)==true) script = "<script>alert('帐号冲突，请重新输入');location.href='../mainAdmin.jsp'</script>";
+			else if(stu.addOne(sid, snm, spw)==true) script = "<script>alert('添加学生帐号成功');location.href='../mainAdmin.jsp'</script>";
+			else script = "<script>alert('添加帐号失败？？？');location.href='../mainAdmin.jsp'</script>";
+			response.getWriter().println(script);
+			return ;
 		}
-		else if(add_tea!=null) {
-			String addt_id=request.getParameter("addt_id");
-			String addt_nm=request.getParameter("addt_nm");
-			String addt_pw=request.getParameter("addt_pw");
+		else if(tadd!=null) {
+			String tid=request.getParameter("tid_add");
+			String tnm=request.getParameter("tnm_add");
+			String tpw=request.getParameter("tpw_add");
 			
-			System.out.println(addt_id+" "+addt_nm+" "+addt_pw);
-			if(addt_id.length()==0 || addt_nm.length()==0 || addt_pw.length()==0) {
-				String script = "<script>alert('信息不完整，请重新输入');location.href='../mainAdmin.jsp'</script>";
-				response.getWriter().println(script);
-			}
-			else {
-				if(stu.findOne(addt_id)==true || tea.findOne(addt_id)==true) {
-					String script = "<script>alert('帐号冲突，请重新输入');location.href='../mainAdmin.jsp'</script>";
-					response.getWriter().println(script);
-				}
-				else {
-					if(tea.addOne(addt_id, addt_nm, addt_pw)==true) {
-						System.out.println("get ???");
-						String script = "<script>alert('添加教师帐号成功');location.href='../mainAdmin.jsp'</script>";
-						response.getWriter().println(script);
-					}
-					else {
-						System.out.println("no ???");
-						String script = "<script>alert('添加帐号失败？？？');location.href='../mainAdmin.jsp'</script>";
-						response.getWriter().println(script);
-					}
-				}
-			}
+			String script=new String();
+			if(tid.length()==0 || tnm.length()==0 || tpw.length()==0) script = "<script>alert('信息不完整，请重新输入');location.href='../mainAdmin.jsp'</script>";
+			else if(stu.findOne(tid)==true || tea.findOne(tid)==true) script = "<script>alert('帐号冲突，请重新输入');location.href='../mainAdmin.jsp'</script>";
+			else if(tea.addOne(tid, tnm, tpw)==true) script = "<script>alert('添加教师帐号成功');location.href='../mainAdmin.jsp'</script>";
+			else script = "<script>alert('添加帐号失败？？？');location.href='../mainAdmin.jsp'</script>";
+			response.getWriter().println(script);
+			return ;
 		}
 	}
 	
@@ -112,57 +67,34 @@ public class admManage extends HttpServlet {
 		StudentDao stu=new StudentDao();
 		TeacherDao tea=new TeacherDao();
 		
-		String modify_stu=request.getParameter("modify_stu");
-		String modify_tea=request.getParameter("modify_tea");
+		List<Student> stul=stu.getAll();
+		List<Teacher> teal=tea.getAll();
 		
-		if(modify_stu!=null) {
-			String id=request.getParameter("modify_id");
-			String nm=request.getParameter("modify_nm");
-			String pw=request.getParameter("modify_pw");
-			
-			boolean flag=false;
-			Student tmp=stu.getbyId(id);
-			if(nm.length()!=0) {
-				flag=true;
-				tmp.setName(nm);
-			}
-			if(pw.length()!=0) {
-				flag=true;
-				tmp.setPassword(pw);
-			}
-			
-			if(flag==true) {
-				String script = "<script>alert('修改成功');location.href='../mainAdmin.jsp'</script>";
+		for(int i=0; i<stul.size(); i++) {
+			Student tmp=stul.get(i);
+			String str="smod"+i;
+			if(request.getParameter(str)!=null) {
+				String stu_id=tmp.getStu_id(), old=tmp.getPassword(), script=new String();
+				String name=request.getParameter("snm"+i), _new=request.getParameter("spw"+i);
+				stu.modifyName(stu_id, name);
+				stu.modifyPassword(stu_id, old, _new);
+				script = "<script>alert('修改帐号信息成功');location.href='../mainAdmin.jsp'</script>";
 				response.getWriter().println(script);
-			}
-			else {
-				String script = "<script>alert('修改失败');location.href='../mainAdmin.jsp'</script>";
-				response.getWriter().println(script);
+				return ;
 			}
 		}
-		else if(modify_tea!=null) {
-			String id=request.getParameter("modify_id");
-			String nm=request.getParameter("modify_nm");
-			String pw=request.getParameter("modify_pw");
-			
-			boolean flag=false;
-			Teacher tmp=tea.getbyId(id);
-			if(nm.length()!=0) {
-				flag=true;
-				tmp.setName(nm);
-			}
-			if(pw.length()!=0) {
-				flag=true;
-				tmp.setPassword(pw);
-			}
-			
-			if(flag==true) {
-				String script = "<script>alert('修改成功');location.href='../mainAdmin.jsp'</script>";
+		
+		for(int i=0; i<teal.size(); i++) {
+			Teacher tmp=teal.get(i);
+			String str="tmod"+i;
+			if(request.getParameter(str)!=null) {
+				String tea_id=tmp.getTea_id(), old=tmp.getPassword(), script=new String();
+				String name=request.getParameter("tnm"+i), _new=request.getParameter("tpw"+i);
+				tea.modifyName(tea_id, name);
+				tea.modifyPassword(tea_id, old, _new);
+				script = "<script>alert('修改帐号信息成功');location.href='../mainAdmin.jsp'</script>";
 				response.getWriter().println(script);
-			}
-			else {
-				String script = "<script>alert('修改失败');location.href='../mainAdmin.jsp'</script>";
-				response.getWriter().println(script);
+				return ;
 			}
 		}
 	}
@@ -171,14 +103,53 @@ public class admManage extends HttpServlet {
 		StudentDao stu=new StudentDao();
 		TeacherDao tea=new TeacherDao();
 		
-		String modify_stu=request.getParameter("modify_stu");
-		String modify_tea=request.getParameter("modify_tea");
+		List<Student> stul=stu.getAll();
+		List<Teacher> teal=tea.getAll();
 		
-		if(modify_stu!=null) {
-			
+		for(int i=0; i<stul.size(); i++) {
+			Student tmp=stul.get(i);
+			String str="sdel"+i;
+			if(request.getParameter(str)!=null) {
+				String stu_id=tmp.getStu_id(), script;
+				stu.deleteOne(stu_id);
+				script = "<script>alert('删除帐号成功');location.href='../mainAdmin.jsp'</script>";
+				response.getWriter().println(script);
+				return ;
+			}
 		}
-		else if(modify_tea!=null) {
-			
+		
+		for(int i=0; i<teal.size(); i++) {
+			Teacher tmp=teal.get(i);
+			String str="tdel"+i;
+			if(request.getParameter(str)!=null) {
+				String tea_id=tmp.getTea_id(), script;
+				tea.deleteOne(tea_id);
+				script = "<script>alert('删除帐号成功');location.href='../mainAdmin.jsp'</script>";
+				response.getWriter().println(script);
+				return ;
+			}
+		}
+	}
+	
+	public void doModify_self (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		AdminDao adm=new AdminDao();
+		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		String old=request.getParameter("old");
+		String now=request.getParameter("now");
+		
+		String modify_self=request.getParameter("modify_self");
+		
+		if(modify_self!=null) {
+			if(adm.modifyPassword(id, old, now)==true) {
+				String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
+				response.getWriter().println(script);
+			}
+			else {
+				String script = "<script>alert('修改失败，请重新输入');location.href='../mainAdmin.jsp'</script>";
+				response.getWriter().println(script);
+			}
 		}
 	}
 	
@@ -188,34 +159,9 @@ public class admManage extends HttpServlet {
 		doAdd(request, response);
 		doModify(request, response);
 		doDelete(request, response);
-		
+		doModify_self(request, response);
 		String script = "<script>alert('nothing's done');location.href='../mainAdmin.jsp'</script>";
 		response.getWriter().println(script);
-		
-		/*
-		if(adm.checkOne(id, pw)==true) {
-			HttpSession session=request.getSession();
-			session.setAttribute("id", id);
-			session.setAttribute("identity", "admin");
-			response.sendRedirect("../mainAdmin.jsp");
-		}
-		else if(stu.checkOne(id, pw)==true) {
-			HttpSession session=request.getSession();
-			session.setAttribute("id", id);
-			session.setAttribute("identity", "student");
-			response.sendRedirect("../mainStudent.jsp");
-		}
-		else if(tea.checkOne(id, pw)==true) {
-			HttpSession session=request.getSession();
-			session.setAttribute("id", id);
-			session.setAttribute("identity", "teacher");
-			response.sendRedirect("../mainTeacher.jsp") ;
-		}
-		else {
-			String script = "<script>alert('用户名或密码错误，请重新登陆');location.href='../index.jsp'</script>";
-			response.getWriter().println(script);
-		}
-		*/
 	}
 
 	public void init() throws ServletException {

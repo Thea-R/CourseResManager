@@ -48,7 +48,6 @@ public class StudentDao  {
 		boolean flag=false;
 		Student p=(Student) s.get(Student.class, stu_id);
 		if(p==null) {
-			System.out.println("into!");
 			p=new Student();
 			p.setStu_id(stu_id);
 			p.setPassword(password);
@@ -106,8 +105,6 @@ public class StudentDao  {
 
 	public boolean resetPassword(String stu_id, String name) {
 		openSession();
-		
-		System.out.println("stu_id = "+stu_id+" name = "+name);
 		
 		boolean flag=false;
 		Student p =(Student) s.get(Student.class, stu_id);
