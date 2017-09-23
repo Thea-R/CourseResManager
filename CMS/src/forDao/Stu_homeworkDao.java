@@ -36,8 +36,8 @@ public class Stu_homeworkDao {
 		
 		pkeyStu_homework pkey=new pkeyStu_homework();
 		pkey.setCourse_no(course_no);
-		pkey.setStu_id(stu_id);
 		pkey.setHomework_no(homework_no);
+		pkey.setStu_id(stu_id);
 		
 		Stu_homework p=(Stu_homework) s.get(Stu_homework.class, pkey);
 		if(p==null) {
@@ -129,8 +129,8 @@ public class Stu_homeworkDao {
             for (Object filed: os) {
             	i++;
             	if(i==1) pkey.setCourse_no(filed.toString());
-            	else if(i==2) pkey.setStu_id(filed.toString());
-            	else if(i==3) pkey.setHomework_no(filed.toString());
+            	else if(i==2) pkey.setHomework_no(filed.toString());
+            	else if(i==3) pkey.setStu_id(filed.toString());
             	else if(i==4) tmp.setStatus((Boolean)filed);
             	else if(filed!=null) tmp.setOpinion(filed.toString());
             }
@@ -158,8 +158,8 @@ public class Stu_homeworkDao {
             for (Object filed: os) {
             	i++;
             	if(i==1) pkey.setCourse_no(filed.toString());
-            	else if(i==2) pkey.setStu_id(filed.toString());
-            	else if(i==3) pkey.setHomework_no(filed.toString());
+            	else if(i==2) pkey.setHomework_no(filed.toString());
+            	else if(i==3) pkey.setStu_id(filed.toString());
             	else if(i==4) tmp.setStatus((Boolean)filed);
             	else if(filed!=null) tmp.setOpinion(filed.toString());
             }

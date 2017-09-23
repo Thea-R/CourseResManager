@@ -49,7 +49,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<br>
 	
 	<ul id="myTab" class="nav nav-tabs">
-		<li class="active"><a href="#course" data-toggle="tab">已开课程</a></li>
+		<li class="active"><a href="#course" data-toggle="tab">开课情况</a></li>
+		<li><a href="#student" data-toggle="tab">选课情况</a></li>
    		<li><a href="#homework" data-toggle="tab">作业情况</a></li>
    		<li><a href="#inform" data-toggle="tab">教学通告</a></li>
    		<li><a href="#modify_self" data-toggle="tab">修改密码</a></li>
@@ -59,21 +60,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="myTabContent" class="tab-content">
    		<div class="tab-pane fade in active" id="course">
 			<table width="600px">
-			<tr><td width="15%">课程编号</td><td width="15%">课程名字</td><td width="15%">选课人数</td><td width="15%">评教情况</td></tr>
+			<tr><td width="20%">课程编号</td><td width="20%">课程名字</td><td>课件</td></tr>
 			<%for(int i=0; i<list.size(); i++) {
 				Course tmp=list.get(i);
+				String cno=tmp.getCourse_no();
+				String title=course.getTitlebyNo(cno);
 			%>
 			<tr>
-				<td><div id="cs_no"><%=tmp.getCourse_no() %></div></td>
-				<td><div id="cs_name"><%=course.getTitlebyNo(tmp.getCourse_no()) %></div>
-				<td>...</td>
-				<td>...</td>
-				<td><input type="submit" name="submit" value="进入课程"></td>
-				<td><input type="button" name="upl" value="上传课件"></td>
-				<td><input type="button" value="下载课件"></td>
+				<td><%=cno %></td>
+				<td><%=title %></td>
+				<td>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal<%=i%>">查看课件</button>
+					<div class="modal fade" id="myModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog"><div class="modal-content">
+							<div class="modal-header">
+           						<button data-dismiss="modal" class="close" type="button">
+           							<span aria-hidden="true">×</span>
+           							<span class="sr-only">Close</span>
+           						</button>
+            					<h4 class="modal-title">查看课件</h4>
+          					</div>
+          					<div class="modal-body">
+          						<table>
+          							<tr><td width="200px">课程编号：</td><td width="450px"><div name="cno<%=i%>"><%=cno %></div></td></tr>
+          							<tr>
+          								<td>原课件：</td><td>file title..</td>
+          								<td><input type="submit" class="btn btn-primary" name="dnc<%=i%>" value="下载课件"></td>
+          							</tr>
+          							<tr>
+          								<td>新课件：</td><td><input type="file" name="cware<%=i%>"></td>
+          								<td><input type="submit" class="btn btn-primary" name="upc<%=i%>" value="上传课件"></td>
+          							</tr>
+            					</table>
+          					</div>
+          					<div class="modal-footer">
+            					<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+          					</div>
+        				</div><!-- /.modal-content --></div><!-- /.modal-dialog -->
+        			</div>
+				</td>
 			</tr>
 			<%}%>
 			</table>
+   		</div>
+   		
+   		<div class="tab-pane fade" id="student">
+			<p>to be completed..</p>
    		</div>
    		
    		<div class="tab-pane fade" id="homework">

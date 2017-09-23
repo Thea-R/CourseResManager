@@ -147,7 +147,6 @@ public class testHibernate {
 	
 	static void testStu_course() {
 		Stu_courseDao dao=new Stu_courseDao();
-		
 		/*
 		dao.addOne("course001", "1001");
 		dao.addOne("course004", "1001");
@@ -158,9 +157,7 @@ public class testHibernate {
 		dao.addOne("course002", "1003");
 		dao.addOne("course004", "1003");
 		dao.addOne("course006", "1003");
-		*/
 		
-		/*
 		List<Stu_course> list=dao.getbyStu_id("1001");
 		for(int i=0; i<list.size(); i++) {
 			Stu_course tmp=list.get(i);
@@ -191,7 +188,7 @@ public class testHibernate {
 		for(int i=0; i<list.size(); i++) {
 			Stu_homework tmp=list.get(i);
 			pkeyStu_homework pkey=tmp.getPkey();
-			System.out.println("no="+pkey.getCourse_no()+" id="+pkey.getStu_id()+" hmk="+pkey.getHomework_no()+" status="+tmp.getStatus()+" opinion="+tmp.getOpinion());
+			System.out.println("no="+pkey.getCourse_no()+" hmk="+pkey.getHomework_no()+" id="+pkey.getStu_id()+" status="+tmp.getStatus()+" opinion="+tmp.getOpinion());
 		}
 		
 		List<Stu_homework> list=dao.getbyStu_id("1001"); 
@@ -212,6 +209,6 @@ public class testHibernate {
 		//testCourseware();
 		//testTea_homework();
 		//testStu_course();
-		//testStu_homework();
+		testStu_homework();
 	}
 }

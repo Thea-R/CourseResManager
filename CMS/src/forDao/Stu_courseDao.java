@@ -3,6 +3,7 @@ package forDao;
 import forXml.Course;
 import forXml.Stu_course;
 import forXml.Stu_homework;
+import forXml.Teacher;
 import forXml.pkeyStu_course;
 import forXml.pkeyStu_homework;
 
@@ -71,15 +72,10 @@ public class Stu_courseDao {
         return flag;
 	}
 	
-	public boolean modifyGrade(String course_no, String stu_id, Double grade) {
+	public boolean modifyGrade(pkeyStu_course pkey, Double grade) {
 		openSession();
 		
 		boolean flag=false;
-		
-		pkeyStu_course pkey=new pkeyStu_course();
-		pkey.setCourse_no(course_no);
-		pkey.setStu_id(stu_id);
-		
 		Stu_course p=(Stu_course) s.get(Stu_course.class, pkey);
 		if(p!=null) {
 			p.setGrade(grade);
@@ -91,15 +87,10 @@ public class Stu_courseDao {
 		return flag;
 	}
 	
-	public boolean modifyTea_evaluation(String course_no, String stu_id, Double tea_evaluation) {
+	public boolean modifyTea_evaluation(pkeyStu_course pkey, String tea_evaluation) {
 		openSession();
 		
 		boolean flag=false;
-		
-		pkeyStu_course pkey=new pkeyStu_course();
-		pkey.setCourse_no(course_no);
-		pkey.setStu_id(stu_id);
-		
 		Stu_course p=(Stu_course) s.get(Stu_course.class, pkey);
 		if(p!=null) {
 			p.setTea_evaluation(tea_evaluation);
@@ -129,7 +120,7 @@ public class Stu_courseDao {
             	if(i==1) pkey.setCourse_no(filed.toString());
             	else if(i==2) pkey.setStu_id(filed.toString());
             	else if(i==3 && filed!=null) tmp.setGrade((Double)filed);
-            	else if(i==4 && filed!=null) tmp.setTea_evaluation((Double)filed);
+            	else if(i==4 && filed!=null) tmp.setTea_evaluation(filed.toString());
             }
             tmp.setPkey(pkey);
             ret.add(tmp);
@@ -157,7 +148,7 @@ public class Stu_courseDao {
             	if(i==1) pkey.setCourse_no(filed.toString());
             	else if(i==2) pkey.setStu_id(filed.toString());
             	else if(i==3 && filed!=null) tmp.setGrade((Double)filed);
-            	else if(i==4 && filed!=null) tmp.setTea_evaluation((Double)filed);
+            	else if(i==4 && filed!=null) tmp.setTea_evaluation(filed.toString());
             }
             tmp.setPkey(pkey);
             ret.add(tmp);
@@ -188,7 +179,7 @@ public class Stu_courseDao {
 	
 	public String getTitlebyNo(String course_no) {
 		openSession();
-		
+
 		Course p=(Course) s.get(Course.class, course_no);
 		String title=new String();
 		if(p!=null) {
@@ -197,5 +188,34 @@ public class Stu_courseDao {
 		
 		closeSession(false);
 		return title;
+	}
+	
+	public String getTnamebyNo(String course_no) {
+		openSession();
+
+		Course p=(Course) s.get(Course.class, course_no);
+		String tea_name=new String();
+		if(p!=null) {
+			String tea_id=p.getTea_id();
+			TeacherDao tea=new TeacherDao();
+			Teacher tmp=tea.getbyId(tea_id);
+			tea_name=tmp.getName();
+		}
+		
+		closeSession(false);
+		return tea_name;
+	}
+	
+	public String getGrade(pkeyStu_course pkey) {
+		openSession();
+		
+		Stu_course p=(Stu_course) s.get(Stu_course.class, pkey);
+		String grade=new String();
+		if(p!=null && p.getGrade()!=null) {
+			grade=p.getGrade().toString();
+		}
+		
+		closeSession(false);
+		return grade;
 	}
 }

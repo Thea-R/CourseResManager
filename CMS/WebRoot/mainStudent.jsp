@@ -61,19 +61,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="myTabContent" class="tab-content">
    		<div class="tab-pane fade in active" id="course">
 			<table width="600px">
-			<tr><td width="15%">课程编号</td><td width="15%">课程名字</td><td width="15%">任课教师</td><td width="15%">课程成绩</td></tr>
-				<%for(int i=0; i<csl.size(); i++) {
+			<tr><td width="15%">课程编号</td><td width="15%">课程名字</td><td width="15%">任课教师</td><td width="15%">课程成绩</td><td>评教情况</td></tr>
+				<%
+				for(int i=0; i<csl.size(); i++) {
 					Stu_course tmp=csl.get(i);
 					pkeyStu_course pkey=tmp.getPkey();
+					String cno=pkey.getCourse_no();
+					String title=stu_course.getTitlebyNo(cno);
+					String tname=stu_course.getTnamebyNo(cno);
+					String grade=stu_course.getGrade(pkey);
 				%>
 			<tr>
-				<td><div><%=pkey.getCourse_no() %></div></td>
-				<td><div><%=stu_course.getTitlebyNo(pkey.getCourse_no()) %></div>
-				<td>..</td>
-				<td>..</td>
-				<td><input type="submit" name="submit" value="进入课程"></td>
+				<td><%=cno %></td>
+				<td><%=title %></div>
+				<td><%=tname %></td>
+				<td><%=grade==null ? "" : grade %></td>
+				<td>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal<%=i%>">查看评教</button>
+					<div class="modal fade" id="myModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog"><div class="modal-content">
+							<div class="modal-header">
+           						<button data-dismiss="modal" class="close" type="button">
+           							<span aria-hidden="true">×</span>
+           							<span class="sr-only">Close</span>
+           						</button>
+            					<h4 class="modal-title">查看评教</h4>
+          					</div>
+          					<div class="modal-body">
+          						<table>
+          							<tr><td>课程：</td><td width="450px"><%=title %></td></tr>
+          							<tr><td>教师：</td><td><%=tname %></td></tr>
+            						<tr><td valign="top">评教内容：</td><td><%=tmp.getTea_evaluation()==null ? "尚未评教" : tmp.getTea_evaluation() %></td></tr>
+            						<tr><td valign="top">更新评教：</td>
+            							<td><textarea class="form-control" name="eva<%=i%>"></textarea></td></tr>
+            					</table>
+          					</div>
+          					<div class="modal-footer">
+          						<input type="submit" class="btn btn-primary" name="evalua<%=i%>" value="提交评教">
+            					<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+          					</div>
+        				</div><!-- /.modal-content --></div><!-- /.modal-dialog -->
+        			</div>
+				</td>
 				<td><input type="button" value="下载课件"></td>
-				<td><input type="button" value="评教"></td>
 			</tr>
 			<%}%>
 			</table>
@@ -90,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td><div><%=pkey.getCourse_no() %></div></td>
 				<td><div><%=stu_course.getTitlebyNo(pkey.getCourse_no()) %></div>
 				<td><div><%=pkey.getHomework_no() %></div></td>
-				<td><div><%=tmp.getOpinion() %></div></td>
+				<td><div><%=tmp.getOpinion()==null ? "" : tmp.getOpinion()%></div></td>
 				<td><input type="submit" name="submit" value="提交作业"></td>
 				<td><input type="submit" value="下载作业"></td>
 			</tr>

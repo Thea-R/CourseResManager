@@ -2,7 +2,8 @@ package forXml;
 
 public class Stu_course {
 	pkeyStu_course pkey;
-	Double grade, tea_evaluation;
+	Double grade;
+	String tea_evaluation;
 	
 	public pkeyStu_course getPkey() {
 		return pkey;
@@ -12,7 +13,7 @@ public class Stu_course {
 		return grade;
 	}
 	
-	public Double getTea_evaluation() {
+	public String getTea_evaluation() {
 		return tea_evaluation;
 	}
 	
@@ -24,7 +25,7 @@ public class Stu_course {
 		this.grade=grade;
 	}
 	
-	public void setTea_evaluation(Double tea_evaluation) {
+	public void setTea_evaluation(String tea_evaluation) {
 		this.tea_evaluation=tea_evaluation;
 	}
 }
