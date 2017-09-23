@@ -71,12 +71,34 @@ public class CoursewareDao {
 		return flag;
 	}
 	
+	public boolean modifyFile_title(String course_no, String file_title) {
+		openSession();
+		
+		boolean flag=false;
+		Courseware p=(Courseware) s.get(Courseware.class, course_no);
+		if(p!=null) {
+			p.setFile_title(file_title);
+			s.save(p);
+			flag=true;
+		}
+		
+		closeSession(flag);
+		return flag;
+	}
+	
 	public Courseware getbyCourse_no(String course_no) {
 		openSession();
 
+		boolean flag=false;
 		Courseware p=(Courseware) s.get(Courseware.class, course_no);
+		if(p==null) {
+			p=new Courseware();
+			p.setCourse_no(course_no);
+			s.save(p);
+			flag=true;
+		}
 		
-		closeSession(false);
+		closeSession(flag);
 		return p;
 	}
 	

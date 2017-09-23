@@ -36,6 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<jsp:include page="filterTeacher.jsp" />
   	
 	<jsp:useBean id="course" class="forDao.CourseDao" scope="page"></jsp:useBean>
+	<jsp:useBean id="courseware" class="forDao.CoursewareDao" scope="page"></jsp:useBean>
 
 	<%
 		String tea_id=(String)request.getSession().getAttribute("id");
@@ -56,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<li><a href="#modify_self" data-toggle="tab">修改密码</a></li>
 	</ul>
 	
-	<form name="tea_manage" action="/CMS/servlet/teaManage" method="post">
+	<form name="tea_manage" action="/CMS/servlet/teaManage" enctype="multipart/form-data" method="post">
 	<div id="myTabContent" class="tab-content">
    		<div class="tab-pane fade in active" id="course">
 			<table width="600px">
@@ -65,6 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				Course tmp=list.get(i);
 				String cno=tmp.getCourse_no();
 				String title=course.getTitlebyNo(cno);
+				String filetitle=courseware.getbyCourse_no(cno).getFile_title();
 			%>
 			<tr>
 				<td><%=cno %></td>
@@ -82,18 +84,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           					</div>
           					<div class="modal-body">
           						<table>
-          							<tr><td width="200px">课程编号：</td><td width="450px"><div name="cno<%=i%>"><%=cno %></div></td></tr>
+          							<tr><td width="200px">课程编号：</td><td width="450px"><%=cno %></td></tr>
           							<tr>
-          								<td>原课件：</td><td>file title..</td>
-          								<td><input type="submit" class="btn btn-primary" name="dnc<%=i%>" value="下载课件"></td>
+          								<td>原课件：</td>
+          								<%if(filetitle==null) {%>	<td>尚未上传课件</td>
+          								<%}else{%>	<td><input type="submit" class="btn btn-primary" name="dnc<%=i%>" value="<%=filetitle%>"></td>
+          								<%}%>
           							</tr>
           							<tr>
           								<td>新课件：</td><td><input type="file" name="cware<%=i%>"></td>
-          								<td><input type="submit" class="btn btn-primary" name="upc<%=i%>" value="上传课件"></td>
           							</tr>
             					</table>
           					</div>
           					<div class="modal-footer">
+          						<input type="submit" class="btn btn-primary" name="upc<%=i%>" value="上传课件">
             					<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
           					</div>
         				</div><!-- /.modal-content --></div><!-- /.modal-dialog -->
