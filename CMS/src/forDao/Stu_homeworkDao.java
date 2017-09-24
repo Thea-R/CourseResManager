@@ -71,27 +71,6 @@ public class Stu_homeworkDao {
 		return flag;
 	}
 	
-	public boolean modifyStatus(String course_no, String stu_id, String homework_no, boolean status) {
-		openSession();
-		
-		boolean flag=false;
-		
-		pkeyStu_homework pkey=new pkeyStu_homework();
-		pkey.setCourse_no(course_no);
-		pkey.setStu_id(stu_id);
-		pkey.setHomework_no(homework_no);
-		
-		Stu_homework p=(Stu_homework) s.get(Stu_homework.class, pkey);
-		if(p!=null) {
-			p.setStatus(status);
-			s.save(p);
-			flag=true;
-		}
-		
-		closeSession(flag);
-		return flag;
-	}
-	
 	public boolean modifyOpinion(String course_no, String stu_id, String homework_no, String opinion) {
 		openSession();
 		
@@ -131,7 +110,6 @@ public class Stu_homeworkDao {
             	if(i==1) pkey.setCourse_no(filed.toString());
             	else if(i==2) pkey.setHomework_no(filed.toString());
             	else if(i==3) pkey.setStu_id(filed.toString());
-            	else if(i==4) tmp.setStatus((Boolean)filed);
             	else if(filed!=null) tmp.setOpinion(filed.toString());
             }
             tmp.setPkey(pkey);
@@ -160,7 +138,6 @@ public class Stu_homeworkDao {
             	if(i==1) pkey.setCourse_no(filed.toString());
             	else if(i==2) pkey.setHomework_no(filed.toString());
             	else if(i==3) pkey.setStu_id(filed.toString());
-            	else if(i==4) tmp.setStatus((Boolean)filed);
             	else if(filed!=null) tmp.setOpinion(filed.toString());
             }
             tmp.setPkey(pkey);

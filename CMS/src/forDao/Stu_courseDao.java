@@ -210,7 +210,7 @@ public class Stu_courseDao {
 		openSession();
 		
 		Stu_course p=(Stu_course) s.get(Stu_course.class, pkey);
-		String grade=new String();
+		String grade=null;
 		if(p!=null && p.getGrade()!=null) {
 			grade=p.getGrade().toString();
 		}

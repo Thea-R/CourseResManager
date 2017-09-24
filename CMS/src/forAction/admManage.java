@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import forDao.Trans;
 import forDao.AdminDao;
 import forDao.StudentDao;
 import forDao.TeacherDao;
@@ -30,15 +31,16 @@ public class admManage extends HttpServlet {
 	}
 
 	public void doAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Trans trans=new Trans();
 		StudentDao stu=new StudentDao();
 		TeacherDao tea=new TeacherDao();
 		
 		String sadd=request.getParameter("sadd");
 		String tadd=request.getParameter("tadd");
 		if(sadd!=null) {
-			String sid=request.getParameter("sid_add");
-			String snm=request.getParameter("snm_add");
-			String spw=request.getParameter("spw_add");
+			String sid=trans.to(request.getParameter("sid_add"));
+			String snm=trans.to(request.getParameter("snm_add"));
+			String spw=trans.to(request.getParameter("spw_add"));
 			
 			String script=new String();
 			if(sid.length()==0 || snm.length()==0 || spw.length()==0) script = "<script>alert('信息不完整，请重新输入');location.href='../mainAdmin.jsp'</script>";
@@ -49,9 +51,9 @@ public class admManage extends HttpServlet {
 			return ;
 		}
 		else if(tadd!=null) {
-			String tid=request.getParameter("tid_add");
-			String tnm=request.getParameter("tnm_add");
-			String tpw=request.getParameter("tpw_add");
+			String tid=trans.to(request.getParameter("tid_add"));
+			String tnm=trans.to(request.getParameter("tnm_add"));
+			String tpw=trans.to(request.getParameter("tpw_add"));
 			
 			String script=new String();
 			if(tid.length()==0 || tnm.length()==0 || tpw.length()==0) script = "<script>alert('信息不完整，请重新输入');location.href='../mainAdmin.jsp'</script>";
@@ -64,6 +66,7 @@ public class admManage extends HttpServlet {
 	}
 	
 	public void doModify (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Trans trans=new Trans();
 		StudentDao stu=new StudentDao();
 		TeacherDao tea=new TeacherDao();
 		
@@ -74,8 +77,10 @@ public class admManage extends HttpServlet {
 			Student tmp=stul.get(i);
 			String str="smod"+i;
 			if(request.getParameter(str)!=null) {
-				String stu_id=tmp.getStu_id(), old=tmp.getPassword(), script=new String();
-				String name=request.getParameter("snm"+i), _new=request.getParameter("spw"+i);
+				String stu_id=tmp.getStu_id(),	old=tmp.getPassword(), script=new String();
+				String name=trans.to(request.getParameter("snm"+i));
+				String _new=trans.to(request.getParameter("spw"+i));
+				
 				stu.modifyName(stu_id, name);
 				stu.modifyPassword(stu_id, old, _new);
 				script = "<script>alert('修改帐号信息成功');location.href='../mainAdmin.jsp'</script>";
@@ -89,7 +94,9 @@ public class admManage extends HttpServlet {
 			String str="tmod"+i;
 			if(request.getParameter(str)!=null) {
 				String tea_id=tmp.getTea_id(), old=tmp.getPassword(), script=new String();
-				String name=request.getParameter("tnm"+i), _new=request.getParameter("tpw"+i);
+				String name=trans.to(request.getParameter("tnm"+i));
+				String _new=trans.to(request.getParameter("tpw"+i));
+				
 				tea.modifyName(tea_id, name);
 				tea.modifyPassword(tea_id, old, _new);
 				script = "<script>alert('修改帐号信息成功');location.href='../mainAdmin.jsp'</script>";
@@ -132,13 +139,13 @@ public class admManage extends HttpServlet {
 	}
 	
 	public void doModify_self (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Trans trans=new Trans();
 		AdminDao adm=new AdminDao();
 		
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		String old=request.getParameter("old");
-		String now=request.getParameter("now");
-		
+		String old=trans.to(request.getParameter("old"));
+		String now=trans.to(request.getParameter("now"));
 		String modify_self=request.getParameter("modify_self");
 		
 		if(modify_self!=null) {
