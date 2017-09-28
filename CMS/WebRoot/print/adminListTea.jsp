@@ -11,13 +11,14 @@
 	List<Teacher> teal=tea.getAll();
 %>
 
-<table width="400px">
-	<tr>
-		<td width="30%">工号</td>
-		<td width="30%">姓名</td>
-		<td width="25%">密码</td>
-		<td>操作</td>
-	</tr>
+<table width="850px" class="table table-hover">
+	<thead>
+		<th width="30%">工号</th>
+		<th width="30%">姓名</th>
+		<th width="25%">密码</th>
+		<th>操作</th>
+	</thead>
+	<tbody>
 	<%
 		for(int i=0; i<teal.size(); i++) {
 		Teacher tmp=teal.get(i);
@@ -80,6 +81,7 @@
 		<td><input name="tid_add" type="text"></td>
 		<td><input name="tnm_add" type="text"></td>
 		<td><input name="tpw_add" type="password"></td>
-		<td><input name="tadd" type="submit" value="添加"></td>
+		<td><input name="tadd" type="submit" value="添加" class="btn btn-default"></td>
 	</tr>
+	</tbody>
 </table>

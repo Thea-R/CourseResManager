@@ -13,7 +13,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'login.jsp' starting page</title>
+<title>课程资源管理系统</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -29,28 +29,27 @@
 </head>
 
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="header.jsp"></jsp:include>
 
-	<form name="login" action="/CMS/servlet/checkIdentity" method="post">
-		<div align="center">
-			<table>
-				<tr>
-					<td>账号：</td>
-					<td><input type="text" name="id" size="20"></td>
-				</tr>
-				<tr>
-					<td>密码：</td>
-					<td><input type="password" name="password" size="20"></td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="submit" value="登录"></td>
-					<td><a href="forgetPassword.jsp"><input type="button"
-							value="忘记密码"></a></td>
-				</tr>
-			</table>
-		</div>
-	</form>
+	<div class="container" style="width: 400px; padding-top: 100px">
+		<form class="form-signin" name="login" action="/CMS/servlet/checkIdentity" method="post">
+			<div class="input-group input-group-lg">
+            	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>  
+                <input type="text" name="id" class="form-control" placeholder="用户名" required autofocus>
+            </div>
+            <br>  
+            	
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>  
+                <input type="password" name="password" class="form-control" placeholder="密码" required>
+            </div>
+            <br>  
 
-	<jsp:include page="footer.jsp" />
+    		<a href="forgetPassword.jsp"><input type="button" class="btn btn-default" value="忘记密码" style="float: right"></a>
+			<input class="btn btn-primary" type="submit" name="submit" value="用户登录" style="float: right">
+		</form>
+	</div>
+	
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

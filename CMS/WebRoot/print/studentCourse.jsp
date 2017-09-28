@@ -12,13 +12,16 @@
 	List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
 %>
 
-<table width="600px">
-	<tr>
-		<td width="15%">课程编号</td>
-		<td width="15%">课程名字</td>
-		<td width="15%">任课教师</td>
-		<td width="15%">课程成绩</td>
-	</tr>
+<table width="850px" class="table table-hover">
+	<thead>
+		<th width="15%">课程编号</th>
+		<th width="15%">课程名字</th>
+		<th width="15%">任课教师</th>
+		<th width="15%">课程成绩</th>
+		<th></th>
+		<th></th>
+	</thead>
+	<tbody>
 	<%
 		for(int i=0; i<csl.size(); i++) {
 			Stu_course tmp=csl.get(i);
@@ -85,7 +88,7 @@
 			String filetitle=cw.getFile_title();
 			if(filetitle==null) {
 		%>
-		<td><input type="button" value="尚无课件"></td>
+		<td><input type="button" value="尚无课件" class="btn disabled"></td>
 		<%
 			}else{
 		%>
@@ -100,4 +103,5 @@
 	<%
 		}
 	%>
+	</tbody>
 </table>

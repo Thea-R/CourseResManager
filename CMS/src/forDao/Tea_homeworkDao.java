@@ -71,6 +71,28 @@ public class Tea_homeworkDao {
 		return flag;
 	}
 	
+	public String getNext() {
+		openSession();
+		
+		String nxt="hwk";
+		Query query=s.createQuery("from Tea_homework");
+		List<Tea_homework> list=query.list();
+		
+		int num=0;
+		for(int i=0; i<list.size(); i++) {
+			String tmp=list.get(i).getPkey().getHomework_no().substring(3);
+			int tnum=Integer.parseInt(tmp);
+			num= tnum>num ? tnum : num;
+		}
+		
+		String tmp=num+"";
+		for(int i=0; i<4-tmp.length(); i++) nxt=nxt+"0";
+		nxt=nxt+tmp;
+		
+		closeSession(false);
+		return nxt;
+	}
+	
 	public List<Tea_homework> getbyCourse_no(String course_no) {
 		openSession();
 

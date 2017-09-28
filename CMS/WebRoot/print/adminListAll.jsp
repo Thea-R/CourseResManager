@@ -11,12 +11,13 @@
 	List<Teacher> teal=tea.getAll();
 %>
 
-<table width="300px">
-	<tr>
-		<td width="35%">学/工号</td>
-		<td width="35%">姓名</td>
-		<td>身份</td>
-	</tr>
+<table width="850px" class="table table-hover">
+	<thead>
+		<th width="35%">帐号</th>
+		<th width="35%">姓名</th>
+		<th>身份</th>
+	</thead>
+	<tbody>
 	<%
 		for(int i=0; i<adml.size(); i++) {
 		Admin tmp=adml.get(i);
@@ -49,4 +50,5 @@
 	<%
 		}
 	%>
+	</tbody>
 </table>

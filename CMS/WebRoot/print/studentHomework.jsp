@@ -11,13 +11,15 @@
 	List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
 %>
 
-<table width="600px">
-	<tr>
-		<td width="15%">课程编号</td>
-		<td width="15%">课程名字</td>
-		<td width="15%">作业编号</td>
-		<td width="15%">批改意见</td>
-	</tr>
+<table width="850px" class="table table-hover">
+	<thead>
+		<th width="20%">课程编号</th>
+		<th width="20%">课程名字</th>
+		<th width="20%">作业编号</th>
+		<th width="20%">批改意见</th>
+		<th></th>
+	</thead>
+	<tbody>
 	<%
 		for(int i=0; i<hkl.size(); i++) {
 			Stu_homework tmp=hkl.get(i);
@@ -118,4 +120,5 @@
 	<%
 		}
 	%>
+	</tbody>
 </table>

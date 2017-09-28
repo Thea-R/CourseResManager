@@ -11,12 +11,13 @@
 	List<Teacher> teal=tea.getAll();
 %>
 
-<table width="400px">
-	<tr>
-		<td width="30%">学号</td>
-		<td width="30%">姓名</td>
-		<td width="25%">密码</td>
-	</tr>
+<table width="850px" class="table table-hover">
+	<thead>
+		<th width="30%">学号</th>
+		<th width="30%">姓名</th>
+		<th width="25%">密码</th>
+	</thead>
+	<tbody>
 	<%
 		for(int i=0; i<stul.size(); i++) {
 		Student tmp=stul.get(i);
@@ -77,6 +78,7 @@
 		<td><input name="sid_add" type="text"></td>
 		<td><input name="snm_add" type="text"></td>
 		<td><input name="spw_add" type="password"></td>
-		<td><input name="sadd" type="submit" value="添加"></td>
+		<td><input name="sadd" type="submit" value="添加" class="btn btn-default"></td>
 	</tr>
+	</tbody>
 </table>

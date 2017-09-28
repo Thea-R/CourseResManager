@@ -13,7 +13,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'mainAdmin.jsp' starting page</title>
+<title>课程资源管理系统</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -32,34 +32,31 @@
 	<jsp:include page="header.jsp" />
 	<jsp:include page="filterStudent.jsp" />
 
-	<form name="logout" action="/CMS/servlet/logout" method="post">
-		<input type="submit" name="lgo" value="登出">
-	</form>
-
-	<br>
-
+<div class="container" style="width:850px">
 	<ul id="myTab" class="nav nav-tabs">
-		<li class="active"><a href="#course" data-toggle="tab">课程</a></li>
-		<li><a href="#homework" data-toggle="tab">作业</a></li>
-		<li><a href="#modify_self" data-toggle="tab">修改密码</a></li>
+		<li class="active"><a href="#course" data-toggle="tab"><h4>课程</h4></a></li>
+		<li><a href="#homework" data-toggle="tab"><h4>作业</h4></a></li>
+		<li><a href="#modify_self" data-toggle="tab"><h4>修改密码</h4></a></li>
+		<li style="float:right"><a href="<%=path%>/logout.jsp"><h4>登出</h4></a></li>
 	</ul>
 
 	<form name="stu_manage" action="/CMS/servlet/stuManage"
 		enctype="multipart/form-data" method="post">
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade in active" id="course">
-				<jsp:include page="print/studentCourse.jsp"></jsp:include>
+				<jsp:include page="print/studentCourse.jsp" />
 			</div>
 
 			<div class="tab-pane fade" id="homework">
-				<jsp:include page="print/studentHomework.jsp"></jsp:include>
+				<jsp:include page="print/studentHomework.jsp" />
 			</div>
 
 			<div class="tab-pane fade" id="modify_self">
-				<jsp:include page="print/studentModify_self.jsp"></jsp:include>
+				<jsp:include page="print/studentModify_self.jsp" />
 			</div>
 		</div>
 	</form>
+</div>
 
 	<jsp:include page="footer.jsp" />
 </body>

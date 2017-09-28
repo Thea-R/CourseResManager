@@ -10,15 +10,15 @@
 	String tea_id=(String)request.getSession().getAttribute("id");
 	List<Course> cl=course.getbyTea_id(tea_id);
 
-	System.out.println("grade "+cl.size());
 	for(int i=0; i<cl.size(); i++) {
 		Course cs=cl.get(i);
 		String cno=cs.getCourse_no();
 		List<Stu_course> scl=stu_course.getbyCourse_no(cno);
 		%>
 		<div class="tab-pane fade" id="grade<%=i%>">
-			<table width="600px">
-				<tr><td width="25%">学号</td><td width="25%">姓名</td><td width="25%">成绩</td></tr>
+			<table width="850px" class="table table-hover">
+				<thead><th width="25%">学号</th><th width="25%">姓名</th><th width="25%">成绩</th><th></th></thead>
+				<tbody>
 	<%
 			for(int j=0; j<scl.size (); j++) {
 				Stu_course scs=scl.get(j);
@@ -33,11 +33,12 @@
 					<td><%=stu_id %></td>
 					<td><%=nm %></td>
 					<td><input type="text" name="gd<%=i*scl.size()+j %>" value="<%=grade==null ? "" : grade %>"></td>
-					<td><input type="submit" name="sgd<%=i*scl.size()+j %>" value="提交成绩"></td>
+					<td><input type="submit" name="sgd<%=i*scl.size()+j %>" value="提交成绩" class="btn btn-primary"></td>
 				</tr>
 	<%	
 			}
 	%>
+				</tbody>
 			</table>
 		</div>
 	<%

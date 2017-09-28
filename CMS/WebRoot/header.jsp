@@ -12,7 +12,7 @@ body {
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top"
 		style="height: 100px">
-	<div align="center" style="margin-top:20px; font-size:40px">课程管理系统</div>
+	<div align="center" style="margin-top:20px; font-size:40px">课程资源管理系统</div>
 	</nav>
 </body>
 </html>

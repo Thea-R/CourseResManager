@@ -8,12 +8,13 @@
 	String tea_id=(String)request.getSession().getAttribute("id");
 	List<Course> cl=course.getbyTea_id(tea_id);
 %>
-<table width="600px">
-	<tr>
-		<td width="20%">课程编号</td>
-		<td width="20%">课程名字</td>
-		<td>课件</td>
-	</tr>
+<table width="850px" class="table table-hover">
+	<thead>
+		<th width="35%">课程编号</th>
+		<th width="35%">课程名字</th>
+		<th>课件</th>
+	</thead>
+	<tbody>
 	<%
 		for(int i=0; i<cl.size(); i++) {
 			Course tmp=cl.get(i);
@@ -75,4 +76,5 @@
 		</td>
 	</tr>
 	<%}%>
+	</tbody>
 </table>

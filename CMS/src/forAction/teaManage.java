@@ -91,6 +91,7 @@ public class teaManage extends HttpServlet {
     				
     				String upc=req.getParameter("upc"+i);
     				String dnc=req.getParameter("dnc"+i);
+    				String rel=req.getParameter("rel"+i);
     				
     				if(upc!=null) {
     					File file=su.getFiles().getFile(i);
@@ -118,6 +119,19 @@ public class teaManage extends HttpServlet {
     					su.downloadFile(dir2);// 下载文件，保证Web应用下的目录下有文件
     					file2.delete();
     					return ;
+    				}
+    				else if(rel!=null) {
+    					String hno=tea_homework.getNext();
+    					tea_homework.addOne(cno, hno);
+    					
+    					List<Stu_course> scs=stu_course.getbyCourse_no(cno);
+    					for(int j=0; j<scs.size(); j++) {
+    						String stu_id=scs.get(j).getPkey().getStu_id();
+    						stu_homework.addOne(cno, hno, stu_id);
+    					}
+    					String script = "<script>alert('发布作业成功！');location.href='../mainTeacher.jsp'</script>";
+    		    		response.getWriter().println(script);
+    		    		return ;
     				}
             		
             		List<Tea_homework> thk=tea_homework.getbyCourse_no(cno);
@@ -162,16 +176,7 @@ public class teaManage extends HttpServlet {
         					String grade=trans.to(req.getParameter("gd"+num)), script=new String();
         					if(grade.length()==0)	script = "<script>alert('无评分，请重新评分');location.href='../mainTeacher.jsp'</script>";
         					else {
-        						double gd=0, tp=1, ret=0;
-        						for(int k=0, flag=0; k<grade.length(); k++) {
-        							if(grade.charAt(k)=='.')	flag=1;
-        							else {
-        								ret=ret*10+grade.charAt(k)-'0';
-        								if(flag==1)	tp*=10;
-        								gd=ret/tp;
-        							}
-        						}
-        						stu_course.modifyGrade(pkey, new Double(gd));
+        						stu_course.modifyGrade(pkey, Double.valueOf(grade));
         						script = "<script>alert('评分成功！');location.href='../mainTeacher.jsp'</script>";
         					}
         					response.getWriter().println(script);

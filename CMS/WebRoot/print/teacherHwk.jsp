@@ -39,8 +39,9 @@
     			</div>
     			<div id="collapse<%=sum%>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<%=sum%>">
       				<div class="panel-body">
-			<table width="600px">
-				<tr><td width="20%">学号</td><td width="20%">姓名</td><td width="40%">作业</td></tr>
+			<table width="850px" class="table table-hover">
+				<thead><th width="20%">学号</th><th width="20%">姓名</th><th width="40%">作业</th><th></th></thead>
+				<tbody>
 <%
 			for(int j=0; j<shk.size (); j++) {
 				Stu_homework hk=shk.get(j);
@@ -58,11 +59,12 @@
 					<%
 						if(filename==null) {
 					%>
-						<td>尚未提交</td>
+						<td><input type="button" class="btn btn-diabled" value="尚未提交"></td>
+						<td><input type="button" class="btn btn-disabled" value="批改"></td>
 					<% 	}
 						else {
 					%>
-						<td><input type="submit" name="dnhwk<%=num%>" value="<%=filename%>"></td>
+						<td><input type="submit" name="dnhwk<%=num%>" value="<%=filename%>" class="btn btn-info"></td>
 						<td>
 							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myOpinion<%=num%>">批改</button>
 							<div class="modal fade" id="myOpinion<%=num%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -92,15 +94,17 @@
 				</tr>
 <%	
 			}
-%>			</table>
+%>
+				</tbody>
+			</table>
 					</div>
 		   		</div>
 		   	</div>
 <%
 		}
 %>			
-			<input type="button" id="rel<%=i %>" value="发布新作业">
       		</div>
+      		<input type="submit" name="rel<%=i %>" value="发布作业" class="btn btn-success btn-lg" style="float:right">
 		</div>
 <%
 	}
