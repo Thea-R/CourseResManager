@@ -9,10 +9,6 @@
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
-<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css"
-	rel="stylesheet">
-<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 
 <html>
 <head>
@@ -26,9 +22,16 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css"
+	rel="stylesheet">
+<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 </head>
 
 <body>
+	<jsp:include page="header.jsp" />
+	<jsp:include page="filterAdmin.jsp" />
+
 	<br>
 	<form name="logout" action="/CMS/servlet/logout" method="post">
 		<input type="submit" name="lgo" value="登出">
@@ -41,6 +44,7 @@
 		<li><a href="#listTea" data-toggle="tab">教师列表</a></li>
 		<li><a href="#modify_self" data-toggle="tab">修改密码</a></li>
 	</ul>
+
 
 	<form name="adm_manage" action="/CMS/servlet/admManage" method="post">
 		<div id="myTabContent" class="tab-content">

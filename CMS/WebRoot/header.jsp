@@ -1,20 +1,18 @@
-<%@ page language="java" import="java.util.*, java.text.*" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
-
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<%@ page language="java" import="java.util.*, java.text.*"
+	contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>  
-	<style>
-  	body {
-    	padding-top:120px;
-  	}
-	</style>
-  <body>
-	<nav class="navbar navbar-default navbar-fixed-top" style="height: 100px">
-		<div align="center" style="margin-top:20px; font-size:40px">课程管理系统</div>
+
+<html>
+<style>
+body {
+	padding-top: 120px;
+}
+</style>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top"
+		style="height: 100px">
+	<div align="center" style="margin-top:20px; font-size:40px">课程管理系统</div>
 	</nav>
-  </body>
+</body>
 </html>

@@ -36,9 +36,9 @@
 		<td><%=grade==null ? "尚无成绩" : grade%></td>
 		<td>
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#myModal<%=i%>">评教</button>
-			<div class="modal fade" id="myModal<%=i%>" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel">
+				data-target="#myEva<%=i%>">评教</button>
+			<div class="modal fade" id="myEva<%=i%>" tabindex="-1" role="dialog"
+				aria-labelledby="myEvaLabel">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -79,23 +79,23 @@
 				<!-- /.modal-dialog -->
 			</div>
 		</td>
-		
+
 		<%
 			Courseware cw=courseware.getbyCourse_no(cno);
 			String filetitle=cw.getFile_title();
 			if(filetitle==null) {
 		%>
-			<td>尚无课件</td>
+		<td><input type="button" value="尚无课件"></td>
 		<%
 			}else{
 		%>
-			<td><input type="submit" class="btn btn-primary"
-				name="dnc<%=i%>" value="下载课件"></td>
+		<td><input type="submit" class="btn btn-primary" name="dnc<%=i%>"
+			value="下载课件"></td>
 		<%
-		}
+			}
 		%>
 		</td>
-		
+
 	</tr>
 	<%
 		}

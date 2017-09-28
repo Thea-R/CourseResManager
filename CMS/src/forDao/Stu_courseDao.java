@@ -105,7 +105,7 @@ public class Stu_courseDao {
 	public List<Stu_course> getbyCourse_no(String course_no) {
 		openSession();
 
-        String sql = "select * from stu_course where course_no ="+course_no;
+        String sql = "select * from stu_course where course_no = '"+course_no+"'";
         Query query= s.createSQLQuery(sql);
         List<Object[]> list= query.list();
         List<Stu_course> ret=new ArrayList<Stu_course>();
@@ -119,7 +119,7 @@ public class Stu_courseDao {
             	i++;
             	if(i==1) pkey.setCourse_no(filed.toString());
             	else if(i==2) pkey.setStu_id(filed.toString());
-            	else if(i==3 && filed!=null) tmp.setGrade((Double)filed);
+            	else if(i==3 && filed!=null) tmp.setGrade(new Double(filed.toString()));
             	else if(i==4 && filed!=null) tmp.setTea_evaluation(filed.toString());
             }
             tmp.setPkey(pkey);
@@ -133,7 +133,7 @@ public class Stu_courseDao {
 	public List<Stu_course> getbyStu_id(String stu_id) {
 		openSession();
 
-		String sql = "select * from stu_course where stu_id ="+stu_id;
+		String sql = "select * from stu_course where stu_id = '"+stu_id+"'";
         Query query= s.createSQLQuery(sql);
         List<Object[]> list= query.list();
         List<Stu_course> ret=new ArrayList<Stu_course>();
@@ -147,7 +147,7 @@ public class Stu_courseDao {
             	i++;
             	if(i==1) pkey.setCourse_no(filed.toString());
             	else if(i==2) pkey.setStu_id(filed.toString());
-            	else if(i==3 && filed!=null) tmp.setGrade((Double)filed);
+            	else if(i==3 && filed!=null) tmp.setGrade(new Double(filed.toString()));
             	else if(i==4 && filed!=null) tmp.setTea_evaluation(filed.toString());
             }
             tmp.setPkey(pkey);

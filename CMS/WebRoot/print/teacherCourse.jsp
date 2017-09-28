@@ -6,7 +6,7 @@
 
 <%
 	String tea_id=(String)request.getSession().getAttribute("id");
-	List<Course> list=course.getbyTea_id(tea_id);
+	List<Course> cl=course.getbyTea_id(tea_id);
 %>
 <table width="600px">
 	<tr>
@@ -15,8 +15,8 @@
 		<td>课件</td>
 	</tr>
 	<%
-		for(int i=0; i<list.size(); i++) {
-			Course tmp=list.get(i);
+		for(int i=0; i<cl.size(); i++) {
+			Course tmp=cl.get(i);
 			String cno=tmp.getCourse_no();
 			String title=course.getTitlebyNo(cno);
 			String filetitle=courseware.getbyCourse_no(cno).getFile_title();

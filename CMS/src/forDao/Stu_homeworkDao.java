@@ -92,16 +92,36 @@ public class Stu_homeworkDao {
 		return flag;
 	}
 	
+	public boolean modifyFilename(String course_no, String stu_id, String homework_no, String filename) {
+		openSession();
+		
+		boolean flag=false;
+		
+		pkeyStu_homework pkey=new pkeyStu_homework();
+		pkey.setCourse_no(course_no);
+		pkey.setStu_id(stu_id);
+		pkey.setHomework_no(homework_no);
+		
+		Stu_homework p=(Stu_homework) s.get(Stu_homework.class, pkey);
+		if(p!=null) {
+			p.setFilename(filename);
+			s.save(p);
+			flag=true;
+		}
+		
+		closeSession(flag);
+		return flag;
+	}
+	
 	public List<Stu_homework> getbyCourse_no(String course_no) {
 		openSession();
 
-		String sql = "select * from stu_homework where course_no ="+course_no;
+		String sql = "select * from stu_homework where course_no = '"+course_no+"'";
         Query query= s.createSQLQuery(sql);
         List<Object[]> list= query.list();
         List<Stu_homework> ret=new ArrayList<Stu_homework>();
         
         for (Object[] os : list) {
-        	
         	int i=0;
         	Stu_homework tmp=new Stu_homework();
         	pkeyStu_homework pkey=new pkeyStu_homework();
@@ -110,7 +130,8 @@ public class Stu_homeworkDao {
             	if(i==1) pkey.setCourse_no(filed.toString());
             	else if(i==2) pkey.setHomework_no(filed.toString());
             	else if(i==3) pkey.setStu_id(filed.toString());
-            	else if(filed!=null) tmp.setOpinion(filed.toString());
+            	else if(i==4 && filed!=null) tmp.setFilename(filed.toString());
+            	else if(i==5 && filed!=null) tmp.setOpinion(filed.toString());
             }
             tmp.setPkey(pkey);
             ret.add(tmp);
@@ -123,7 +144,7 @@ public class Stu_homeworkDao {
 	public List<Stu_homework> getbyStu_id(String stu_id) {
 		openSession();
 
-		String sql = "select * from stu_homework where stu_id ="+stu_id;
+		String sql = "select * from stu_homework where stu_id = '"+stu_id+"'";
         Query query= s.createSQLQuery(sql);
         List<Object[]> list= query.list();
         List<Stu_homework> ret=new ArrayList<Stu_homework>();
@@ -138,7 +159,37 @@ public class Stu_homeworkDao {
             	if(i==1) pkey.setCourse_no(filed.toString());
             	else if(i==2) pkey.setHomework_no(filed.toString());
             	else if(i==3) pkey.setStu_id(filed.toString());
-            	else if(filed!=null) tmp.setOpinion(filed.toString());
+            	else if(i==4 && filed!=null) tmp.setFilename(filed.toString());
+            	else if(i==5 && filed!=null) tmp.setOpinion(filed.toString());
+            }
+            tmp.setPkey(pkey);
+            ret.add(tmp);
+        }
+		
+		closeSession(false);
+        return ret;
+	}
+	
+	public List<Stu_homework> getbyHomework_no(String homework_no) {
+		openSession();
+
+		String sql = "select * from stu_homework where homework_no = '"+homework_no+"'";
+        Query query= s.createSQLQuery(sql);
+        List<Object[]> list= query.list();
+        List<Stu_homework> ret=new ArrayList<Stu_homework>();
+        
+        for (Object[] os : list) {
+        	
+        	int i=0;
+        	Stu_homework tmp=new Stu_homework();
+        	pkeyStu_homework pkey=new pkeyStu_homework();
+            for (Object filed: os) {
+            	i++;
+            	if(i==1) pkey.setCourse_no(filed.toString());
+            	else if(i==2) pkey.setHomework_no(filed.toString());
+            	else if(i==3) pkey.setStu_id(filed.toString());
+            	else if(i==4 && filed!=null) tmp.setFilename(filed.toString());
+            	else if(i==5 && filed!=null) tmp.setOpinion(filed.toString());
             }
             tmp.setPkey(pkey);
             ret.add(tmp);

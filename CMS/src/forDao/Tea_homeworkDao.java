@@ -74,7 +74,7 @@ public class Tea_homeworkDao {
 	public List<Tea_homework> getbyCourse_no(String course_no) {
 		openSession();
 
-		String sql = "select * from tea_homework where course_no ="+course_no;
+		String sql = "select * from tea_homework where course_no = '"+course_no+"'";
         Query query= s.createSQLQuery(sql);
         List<Object[]> list= query.list();
         List<Tea_homework> ret=new ArrayList<Tea_homework>();

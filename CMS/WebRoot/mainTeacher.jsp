@@ -3,18 +3,12 @@
 
 <%
 	String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String basePath = request.getScheme() + "://"
+	+ request.getServerName() + ":" + request.getServerPort()
+	+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
-<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css"
-	rel="stylesheet">
-<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
-<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
-<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css"
-	rel="stylesheet">
-<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 
 <html>
 <head>
@@ -28,6 +22,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css"
+	rel="stylesheet">
+<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -38,21 +36,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<input type="submit" name="lgo" value="登出">
 	</form>
 
-	<br>
+	<jsp:useBean id="course" class="forDao.CourseDao" scope="page"></jsp:useBean>
+	<jsp:useBean id="courseware" class="forDao.CoursewareDao" scope="page"></jsp:useBean>
+	<%
+		String tea_id=(String)request.getSession().getAttribute("id");
+			List<Course> cl=course.getbyTea_id(tea_id);
+	%>
 
+	<br>
 	<ul id="myTab" class="nav nav-tabs">
 		<li class="active"><a href="#course" data-toggle="tab">课程</a></li>
 		<li class="dropdown"><a href="#" class="dropdown-toggle"
-			data-toggle="dropdown" id="myTabDrop1">成绩<b class="caret"></b></a>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-				<li><a href="#storm" tabindex="-1" data-toggle="tab">风暴英雄</a></li>
-				<li><a href="#h300" tabindex="-1" data-toggle="tab">300英雄</a></li>
+			data-toggle="dropdown" id="TabHwk">作业<b class="caret"></b></a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="TabHwk">
+				<%
+					for(int i=0; i<cl.size(); i++) {
+							Course tmp=cl.get(i);
+							String cno=tmp.getCourse_no();
+							String title=course.getTitlebyNo(cno);
+				%>
+				<li><a href="#hwk<%=i%>" tabindex="-1" data-toggle="tab"><%=title%></a></li>
+				<%
+					}
+				%>
 			</ul></li>
 		<li class="dropdown"><a href="#" class="dropdown-toggle"
-			data-toggle="dropdown" id="myTabDrop1">作业<b class="caret"></b></a>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-				<li><a href="#storm" tabindex="-1" data-toggle="tab">风暴英雄</a></li>
-				<li><a href="#h300" tabindex="-1" data-toggle="tab">300英雄</a></li>
+			data-toggle="dropdown" id="TabGrade">成绩<b class="caret"></b></a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="TabGrade">
+				<%
+					for(int i=0; i<cl.size(); i++) {
+							Course tmp=cl.get(i);
+							String cno=tmp.getCourse_no();
+							String title=course.getTitlebyNo(cno);
+				%>
+				<li><a href="#grade<%=i%>" tabindex="-1" data-toggle="tab"><%=title%></a></li>
+				<%
+					}
+				%>
 			</ul></li>
 		<li><a href="#modify_self" data-toggle="tab">修改密码</a></li>
 	</ul>
@@ -64,9 +84,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<jsp:include page="/print/teacherCourse.jsp"></jsp:include>
 			</div>
 
-			<div class="tab-pane fade" id="student"><p>to be completed..</p></div>
-			<div class="tab-pane fade" id="storm">to be ..</div>
-			<div class="tab-pane fade" id="h300">to be ..</div>
+			<jsp:include page="/print/teacherHwk.jsp"></jsp:include>
+			<jsp:include page="/print/teacherGrade.jsp"></jsp:include>
 
 			<div class="tab-pane fade" id="modify_self">
 				<jsp:include page="print/teacherModify_self.jsp"></jsp:include>

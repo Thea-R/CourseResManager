@@ -12,6 +12,7 @@
         </composite-id>
         
         <property name="opinion" />
+        <property name="filename" />
     </class>
      
 </hibernate-mapping>

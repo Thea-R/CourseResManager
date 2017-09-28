@@ -9,10 +9,6 @@
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
-<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css"
-	rel="stylesheet">
-<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 
 <html>
 <head>
@@ -26,6 +22,10 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css"
+	rel="stylesheet">
+<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -44,7 +44,8 @@
 		<li><a href="#modify_self" data-toggle="tab">修改密码</a></li>
 	</ul>
 
-	<form name="stu_manage" action="/CMS/servlet/stuManage" enctype="multipart/form-data" method="post">
+	<form name="stu_manage" action="/CMS/servlet/stuManage"
+		enctype="multipart/form-data" method="post">
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade in active" id="course">
 				<jsp:include page="print/studentCourse.jsp"></jsp:include>

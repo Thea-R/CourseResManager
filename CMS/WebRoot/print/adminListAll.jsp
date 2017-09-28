@@ -19,7 +19,7 @@
 	</tr>
 	<%
 		for(int i=0; i<adml.size(); i++) {
-			Admin tmp=adml.get(i);
+		Admin tmp=adml.get(i);
 	%>
 	<tr>
 		<td><%=tmp.getAdm_id()%></td>
@@ -28,8 +28,8 @@
 	</tr>
 	<%
 		}
-		for(int i=0; i<stul.size(); i++) {
-			Student tmp=stul.get(i);
+			for(int i=0; i<stul.size(); i++) {
+		Student tmp=stul.get(i);
 	%>
 	<tr>
 		<td><%=tmp.getStu_id()%></td>
@@ -38,8 +38,8 @@
 	</tr>
 	<%
 		}
-		for(int i=0; i<teal.size(); i++) {
-			Teacher tmp=teal.get(i);
+			for(int i=0; i<teal.size(); i++) {
+		Teacher tmp=teal.get(i);
 	%>
 	<tr>
 		<td><%=tmp.getTea_id()%></td>

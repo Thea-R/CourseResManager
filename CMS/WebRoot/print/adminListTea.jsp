@@ -20,21 +20,21 @@
 	</tr>
 	<%
 		for(int i=0; i<teal.size(); i++) {
-			Teacher tmp=teal.get(i);
-			String tid=tmp.getTea_id();
-			String nm=tmp.getName();
-			String pw=tmp.getPassword();
+		Teacher tmp=teal.get(i);
+		String tid=tmp.getTea_id();
+		String nm=tmp.getName();
+		String pw=tmp.getPassword();
 	%>
 	<tr>
 		<td><%=tid%></td>
 		<td><%=nm%></td>
 		<td><%=pw%></td>
-		
+
 		<td>
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#mdtea<%=i%>">修改</button>
-			<div class="modal fade" id="mdtea<%=i%>" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal fade" id="mdtea<%=i%>" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -44,24 +44,24 @@
 							<h4 class="modal-title">修改信息</h4>
 						</div>
 						<div class="modal-body">
-							<table >
+							<table>
 								<tr>
 									<td>工号：</td>
 									<td width="450px"><%=tid%></td>
 								</tr>
 								<tr>
 									<td>姓名：</td>
-									<td><input type="text" name="tnm<%=i%>"value=<%=nm%>></td>
+									<td><input type="text" name="tnm<%=i%>" value=<%=nm%>></td>
 								</tr>
 								<tr>
 									<td>密码：</td>
-									<td><input type="password" name="tpw<%=i%>"value=<%=pw%>></td>
+									<td><input type="password" name="tpw<%=i%>" value=<%=pw%>></td>
 								</tr>
 							</table>
 						</div>
 						<div class="modal-footer">
-							<input type="submit" name="tmod<%=i%>" value="修改">
-							<input type="submit" name="tdel<%=i%>" value="删除">
+							<input type="submit" name="tmod<%=i%>" value="修改"> <input
+								type="submit" name="tdel<%=i%>" value="删除">
 							<button data-dismiss="modal" class="btn btn-default"
 								type="button">关闭</button>
 						</div>
@@ -75,7 +75,7 @@
 	<%
 		}
 	%>
-	
+
 	<tr>
 		<td><input name="tid_add" type="text"></td>
 		<td><input name="tnm_add" type="text"></td>

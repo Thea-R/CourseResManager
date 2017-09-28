@@ -26,8 +26,8 @@ public class logout extends HttpServlet {
 		session.removeAttribute("id");
 		session.removeAttribute("identity");
 		
-		//String script = "<script>alert('已登出当前账户，请重新登陆');location.href='../index.jsp'</script>";
 		String script = "<script>location.href='../index.jsp'</script>";
+		//String script = "<script>location.href='../logout.jsp'</script>";
 		response.setContentType("text/html;charset=GBK");
 		response.getWriter().println(script);
 		return ;

@@ -15,17 +15,21 @@ import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.io.FileUtils;
 
+import com.jspsmart.upload.File;
 import com.jspsmart.upload.Request;
 import com.jspsmart.upload.SmartUpload;
 import com.jspsmart.upload.SmartUploadException;
 
 import forDao.CoursewareDao;
+import forDao.Stu_homeworkDao;
 import forDao.TeacherDao;
 import forDao.Trans;
 import forDao.Stu_courseDao;
 import forDao.StudentDao;
 import forXml.Stu_course;
+import forXml.Stu_homework;
 import forXml.pkeyStu_course;
+import forXml.pkeyStu_homework;
 
 public class stuManage extends HttpServlet {
 	public stuManage() {
@@ -78,11 +82,11 @@ public class stuManage extends HttpServlet {
     			}
             }
             else {
-        		Stu_courseDao stu_course=new Stu_courseDao();
         		HttpSession session=request.getSession();
         		String stu_id=(String)session.getAttribute("id");
-        		List<Stu_course> csl=stu_course.getbyStu_id(stu_id);
         		
+        		Stu_courseDao stu_course=new Stu_courseDao();
+        		List<Stu_course> csl=stu_course.getbyStu_id(stu_id);
         		for(int i=0; i<csl.size(); i++) {
         			Stu_course tmp=csl.get(i);
         			pkeyStu_course pkey=tmp.getPkey();
@@ -101,7 +105,7 @@ public class stuManage extends HttpServlet {
         				response.getWriter().println(script);
         				return ;
         			}
-        			else if(str2!=null) {
+        			else if(req.getParameter(str2)!=null) {
         				CoursewareDao cw=new CoursewareDao();
     					String filename=cw.getbyCourse_no(cno).getFile_title();
     					String dir1=getServletContext().getRealPath("/")+"WEB-INF/courseware/"+cno+filename.substring(filename.lastIndexOf("."));
@@ -115,6 +119,37 @@ public class stuManage extends HttpServlet {
     					file2.delete();
     					return ;
     				}
+        		}
+        		
+        		Stu_homeworkDao stu_homework=new Stu_homeworkDao();
+        		List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
+        		for(int i=0; i<hkl.size(); i++) {
+        			Stu_homework tmp=hkl.get(i);
+        			pkeyStu_homework pkey=tmp.getPkey();
+        			String cno=pkey.getCourse_no();
+        			String hno=pkey.getHomework_no();
+        			
+        			String str1="uphwk"+i;
+        			String str2="dnhwk"+i;
+        			if(req.getParameter(str1)!=null) {
+        				File file=su.getFiles().getFile(i);
+    		        	String ext=file.getFileExt();
+    		        	file.saveAs("/WEB-INF/homework/"+hno+"_"+stu_id+"."+ext);
+    		            
+    		        	stu_homework.modifyFilename(cno, stu_id, hno, hno+"_"+stu_id+"."+ext);
+    		        	
+    		            String script = "<script>alert('上传成功！');location.href='../mainStudent.jsp'</script>";
+    		    		response.getWriter().println(script);
+    		    		return ;
+        			}
+        			else if(req.getParameter(str2)!=null) {
+        				String filename=tmp.getFilename();
+        				String dir=getServletContext().getRealPath("/")+"WEB-INF/homework/"+filename;
+
+        				su.setContentDisposition(null);
+        				su.downloadFile(dir);
+        				return ;
+        			}
         		}
             }
         } catch (SmartUploadException e) {  

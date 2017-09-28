@@ -19,10 +19,10 @@
 	</tr>
 	<%
 		for(int i=0; i<stul.size(); i++) {
-			Student tmp=stul.get(i);
-			String sid=tmp.getStu_id();
-			String nm=tmp.getName();
-			String pw=tmp.getPassword();
+		Student tmp=stul.get(i);
+		String sid=tmp.getStu_id();
+		String nm=tmp.getName();
+		String pw=tmp.getPassword();
 	%>
 	<tr>
 		<td><%=sid%></td>
@@ -31,8 +31,8 @@
 		<td>
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#mdstu<%=i%>">修改</button>
-			<div class="modal fade" id="mdstu<%=i%>" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal fade" id="mdstu<%=i%>" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -42,24 +42,24 @@
 							<h4 class="modal-title">修改信息</h4>
 						</div>
 						<div class="modal-body">
-							<table >
+							<table>
 								<tr>
 									<td>学号：</td>
 									<td width="450px"><%=sid%></td>
 								</tr>
 								<tr>
 									<td>姓名：</td>
-									<td><input type="text" name="snm<%=i%>"value=<%=nm%>></td>
+									<td><input type="text" name="snm<%=i%>" value=<%=nm%>></td>
 								</tr>
 								<tr>
 									<td>密码：</td>
-									<td><input type="password" name="spw<%=i%>"value=<%=pw%>></td>
+									<td><input type="password" name="spw<%=i%>" value=<%=pw%>></td>
 								</tr>
 							</table>
 						</div>
 						<div class="modal-footer">
-							<input type="submit" name="smod<%=i%>" value="修改">
-							<input type="submit" name="sdel<%=i%>" value="删除">
+							<input type="submit" name="smod<%=i%>" value="修改"> <input
+								type="submit" name="sdel<%=i%>" value="删除">
 							<button data-dismiss="modal" class="btn btn-default"
 								type="button">关闭</button>
 						</div>

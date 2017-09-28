@@ -170,7 +170,7 @@ public class testHibernate {
 	
 	static void testStu_homework() {
 		Stu_homeworkDao dao=new Stu_homeworkDao();
-		/*
+		
 		dao.addOne("course001", "hwk0001", "1001");
 		dao.addOne("course001", "hwk0001", "1002");
 		dao.addOne("course002", "hwk0002", "1003");
@@ -183,7 +183,7 @@ public class testHibernate {
 		dao.addOne("course005", "hwk0007", "1001");
 		dao.addOne("course006", "hwk0008", "1002");
 		dao.addOne("course006", "hwk0008", "1003");
-		
+		/*
 		List<Stu_homework> list=dao.getAll();
 		for(int i=0; i<list.size(); i++) {
 			Stu_homework tmp=list.get(i);
