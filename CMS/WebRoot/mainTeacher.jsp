@@ -39,7 +39,9 @@
 			List<Course> cl=course.getbyTea_id(tea_id);
 	%>
 
-<div class="container" style="width:850px">
+<form action="/CMS/servlet/teaManage"
+		enctype="multipart/form-data" method="post">
+	<div class="container" style="width:850px">
 	<ul id="myTab" class="nav nav-tabs">
 		<li class="active"><a href="#course" data-toggle="tab"><h4>课程</h4></a></li>
 		<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -74,8 +76,7 @@
 		<li style="float:right"><a href="<%=path%>/logout.jsp"><h4>登出</h4></a></li>
 	</ul>
 
-	<form name="tea_manage" action="/CMS/servlet/teaManage"
-		enctype="multipart/form-data" method="post">
+	
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade in active" id="course">
 				<jsp:include page="/print/teacherCourse.jsp" />
@@ -88,8 +89,8 @@
 				<jsp:include page="print/teacherModify_self.jsp" />
 			</div>
 		</div>
-	</form>
-</div>
+	</div>
+</form>
 
 	<jsp:include page="footer.jsp" />
 </body>

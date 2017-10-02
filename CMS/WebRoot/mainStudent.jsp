@@ -32,16 +32,13 @@
 	<jsp:include page="header.jsp" />
 	<jsp:include page="filterStudent.jsp" />
 
-<div class="container" style="width:850px">
-	<ul id="myTab" class="nav nav-tabs">
-		<li class="active"><a href="#course" data-toggle="tab"><h4>课程</h4></a></li>
-		<li><a href="#homework" data-toggle="tab"><h4>作业</h4></a></li>
-		<li><a href="#modify_self" data-toggle="tab"><h4>修改密码</h4></a></li>
-		<li style="float:right"><a href="<%=path%>/logout.jsp"><h4>登出</h4></a></li>
-	</ul>
-
-	<form name="stu_manage" action="/CMS/servlet/stuManage"
-		enctype="multipart/form-data" method="post">
+	<div class="container" style="width:850px">
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#course" data-toggle="tab"><h4>课程</h4></a></li>
+			<li><a href="#homework" data-toggle="tab"><h4>作业</h4></a></li>
+			<li><a href="#modify_self" data-toggle="tab"><h4>修改密码</h4></a></li>
+			<li style="float:right"><a href="<%=path%>/logout.jsp"><h4>登出</h4></a></li>
+		</ul>
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade in active" id="course">
 				<jsp:include page="print/studentCourse.jsp" />
@@ -55,8 +52,7 @@
 				<jsp:include page="print/studentModify_self.jsp" />
 			</div>
 		</div>
-	</form>
-</div>
+	</div>
 
 	<jsp:include page="footer.jsp" />
 </body>

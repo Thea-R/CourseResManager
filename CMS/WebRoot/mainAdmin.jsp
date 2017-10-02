@@ -32,16 +32,14 @@
 	<jsp:include page="header.jsp" />
 	<jsp:include page="filterAdmin.jsp" />
 
-<div class="container" style="width:850px">
-	<ul id="myTab" class="nav nav-tabs">
-		<li class="active"><a href="#listAll" data-toggle="tab"><h4>所有账户</h4></a></li>
-		<li><a href="#listStu" data-toggle="tab"><h4>学生列表</h4></a></li>
-		<li><a href="#listTea" data-toggle="tab"><h4>教师列表</h4></a></li>
-		<li><a href="#modify_self" data-toggle="tab"><h4>修改密码</h4></a></li>
-		<li style="float:right"><a href="<%=path%>/logout.jsp"><h4>登出</h4></a></li>
-	</ul>
-
-	<form name="adm_manage" action="/CMS/servlet/admManage" method="post">
+	<div class="container" style="width:850px">
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#listAll" data-toggle="tab"><h4>所有账户</h4></a></li>
+			<li><a href="#listStu" data-toggle="tab"><h4>学生列表</h4></a></li>
+			<li><a href="#listTea" data-toggle="tab"><h4>教师列表</h4></a></li>
+			<li><a href="#modify_self" data-toggle="tab"><h4>修改密码</h4></a></li>
+			<li style="float:right"><a href="<%=path%>/logout.jsp"><h4>登出</h4></a></li>
+		</ul>
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade in active" id="listAll">
 				<jsp:include page="print/adminListAll.jsp" />
@@ -59,8 +57,7 @@
 				<jsp:include page="print/adminModify_self.jsp" />
 			</div>
 		</div>
-	</form>
-</div>
+	</div>
 	
 	<jsp:include page="footer.jsp" />
 </body>

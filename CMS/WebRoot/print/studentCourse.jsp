@@ -12,14 +12,16 @@
 	List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
 %>
 
-<table width="850px" class="table table-hover">
+<form action="/CMS/servlet/stuManage"
+		enctype="multipart/form-data" method="post">
+<table width="850px" class="table table-hover" style="font-size:18px">
 	<thead>
-		<th width="15%">课程编号</th>
-		<th width="15%">课程名字</th>
-		<th width="15%">任课教师</th>
-		<th width="15%">课程成绩</th>
-		<th></th>
-		<th></th>
+		<th width="20%">课程编号</th>
+		<th width="20%">课程名字</th>
+		<th width="20%">任课教师</th>
+		<th width="20%">课程成绩</th>
+		<th width="10%">评教</th>
+		<th>课件</th>
 	</thead>
 	<tbody>
 	<%
@@ -41,7 +43,7 @@
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#myEva<%=i%>">评教</button>
 			<div class="modal fade" id="myEva<%=i%>" tabindex="-1" role="dialog"
-				aria-labelledby="myEvaLabel">
+				aria-labelledby="myModalLabel">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -50,19 +52,19 @@
 							</button>
 							<h4 class="modal-title">评教</h4>
 						</div>
-						<div class="modal-body">
+						<div class="modal-body" align="center">
 							<table>
 								<tr>
-									<td>课程：</td>
+									<td align="right">课程：</td>
 									<td><%=title%></td>
 								</tr>
 								<tr>
-									<td>教师：</td>
+									<td align="right">教师：</td>
 									<td><%=tname%></td>
 								</tr>
 								<tr>
 									<td valign="top">评教内容：</td>
-									<td><%=eva==null ? "尚未评教" : eva%></td>
+									<td><div style="width:320px; word-wrap: break-word; word-break: normal"><%=eva==null ? "尚未评教" : eva%></div></td>
 								</tr>
 								<tr>
 									<td valign="top">更新评教：</td>
@@ -88,12 +90,12 @@
 			String filetitle=cw.getFile_title();
 			if(filetitle==null) {
 		%>
-		<td><input type="button" value="尚无课件" class="btn disabled"></td>
+		<td><input type="button" value="尚无" class="btn disabled"></td>
 		<%
 			}else{
 		%>
 		<td><input type="submit" class="btn btn-primary" name="dnc<%=i%>"
-			value="下载课件"></td>
+			value="下载"></td>
 		<%
 			}
 		%>
@@ -105,3 +107,4 @@
 	%>
 	</tbody>
 </table>
+</form>

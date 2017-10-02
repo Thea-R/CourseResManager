@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import forDao.CourseDao;
+import forDao.Stu_courseDao;
 import forDao.Trans;
 import forDao.AdminDao;
 import forDao.StudentDao;
@@ -45,6 +47,7 @@ public class admManage extends HttpServlet {
 			String script=new String();
 			if(sid.length()==0 || snm.length()==0 || spw.length()==0) script = "<script>alert('信息不完整，请重新输入');location.href='../mainAdmin.jsp'</script>";
 			else if(stu.findOne(sid)==true || tea.findOne(sid)==true) script = "<script>alert('帐号冲突，请重新输入');location.href='../mainAdmin.jsp'</script>";
+			else if(sid.length()>20 || snm.length()>20 || spw.length()>20)	script = "<script>alert('信息长度大于20，请重新输入');location.href='../mainAdmin.jsp'</script>";
 			else if(stu.addOne(sid, snm, spw)==true) script = "<script>alert('添加学生帐号成功');location.href='../mainAdmin.jsp'</script>";
 			else script = "<script>alert('添加帐号失败？？？');location.href='../mainAdmin.jsp'</script>";
 			response.getWriter().println(script);
@@ -58,6 +61,7 @@ public class admManage extends HttpServlet {
 			String script=new String();
 			if(tid.length()==0 || tnm.length()==0 || tpw.length()==0) script = "<script>alert('信息不完整，请重新输入');location.href='../mainAdmin.jsp'</script>";
 			else if(stu.findOne(tid)==true || tea.findOne(tid)==true) script = "<script>alert('帐号冲突，请重新输入');location.href='../mainAdmin.jsp'</script>";
+			else if(tid.length()>20 || tnm.length()>20 || tpw.length()>20)	script = "<script>alert('信息长度大于20，请重新输入');location.href='../mainAdmin.jsp'</script>";
 			else if(tea.addOne(tid, tnm, tpw)==true) script = "<script>alert('添加教师帐号成功');location.href='../mainAdmin.jsp'</script>";
 			else script = "<script>alert('添加帐号失败？？？');location.href='../mainAdmin.jsp'</script>";
 			response.getWriter().println(script);
@@ -81,9 +85,12 @@ public class admManage extends HttpServlet {
 				String name=trans.to(request.getParameter("snm"+i));
 				String _new=trans.to(request.getParameter("spw"+i));
 				
-				stu.modifyName(stu_id, name);
-				stu.modifyPassword(stu_id, old, _new);
-				script = "<script>alert('修改帐号信息成功');location.href='../mainAdmin.jsp'</script>";
+				if(stu_id.length()>20 || name.length()>20 || _new.length()>20)	script = "<script>alert('信息长度大于20，请重新输入');location.href='../mainAdmin.jsp'</script>";
+				else {
+					stu.modifyName(stu_id, name);
+					stu.modifyPassword(stu_id, old, _new);
+					script = "<script>alert('修改帐号信息成功');location.href='../mainAdmin.jsp'</script>";
+				}
 				response.getWriter().println(script);
 				return ;
 			}
@@ -97,9 +104,12 @@ public class admManage extends HttpServlet {
 				String name=trans.to(request.getParameter("tnm"+i));
 				String _new=trans.to(request.getParameter("tpw"+i));
 				
-				tea.modifyName(tea_id, name);
-				tea.modifyPassword(tea_id, old, _new);
-				script = "<script>alert('修改帐号信息成功');location.href='../mainAdmin.jsp'</script>";
+				if(tea_id.length()>20 || name.length()>20 || _new.length()>20)	script = "<script>alert('信息长度大于20，请重新输入');location.href='../mainAdmin.jsp'</script>";
+				else {
+					tea.modifyName(tea_id, name);
+					tea.modifyPassword(tea_id, old, _new);
+					script = "<script>alert('修改帐号信息成功');location.href='../mainAdmin.jsp'</script>";
+				}
 				response.getWriter().println(script);
 				return ;
 			}
@@ -109,6 +119,8 @@ public class admManage extends HttpServlet {
 	public void doDelete (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StudentDao stu=new StudentDao();
 		TeacherDao tea=new TeacherDao();
+		Stu_courseDao scs=new Stu_courseDao();
+		CourseDao cs=new CourseDao();
 		
 		List<Student> stul=stu.getAll();
 		List<Teacher> teal=tea.getAll();
@@ -119,6 +131,7 @@ public class admManage extends HttpServlet {
 			if(request.getParameter(str)!=null) {
 				String stu_id=tmp.getStu_id(), script;
 				stu.deleteOne(stu_id);
+				scs.deletebyStu_id(stu_id);
 				script = "<script>alert('删除帐号成功');location.href='../mainAdmin.jsp'</script>";
 				response.getWriter().println(script);
 				return ;
@@ -131,6 +144,7 @@ public class admManage extends HttpServlet {
 			if(request.getParameter(str)!=null) {
 				String tea_id=tmp.getTea_id(), script;
 				tea.deleteOne(tea_id);
+				cs.deletebyTea_id(tea_id);
 				script = "<script>alert('删除帐号成功');location.href='../mainAdmin.jsp'</script>";
 				response.getWriter().println(script);
 				return ;
@@ -149,7 +163,11 @@ public class admManage extends HttpServlet {
 		String modify_self=request.getParameter("modify_self");
 		
 		if(modify_self!=null) {
-			if(adm.modifyPassword(id, old, now)==true) {
+			if(now.length()>20)	{
+				String script = "<script>alert('密码长度大于20，请重新输入');location.href='../mainAdmin.jsp'</script>";
+				response.getWriter().println(script);
+			}
+			else if(adm.modifyPassword(id, old, now)==true) {
 				String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
 				response.getWriter().println(script);
 			}

@@ -58,6 +58,23 @@ public class CoursewareDao {
         return flag;
 	}
 	
+	public boolean deletebyCourse_no(String cno) {
+		openSession();
+
+		boolean flag=false;
+		Query query =s.createQuery("from Courseware where course_no = ?");
+        query.setString(0, cno);
+		List<Courseware> list=query.list();
+		for(int i=0; i<list.size(); i++) {
+			Courseware p=list.get(i);
+			s.delete(p);
+			flag=true;
+		}
+		
+		closeSession(flag);
+		return flag;
+	}
+	
 	public boolean findbyCourse_no(String course_no) {
 		openSession();
 		

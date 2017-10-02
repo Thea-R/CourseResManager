@@ -43,13 +43,6 @@ public class stuManage extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 	
-	public void doModify_self (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-	
-	public void doModify_evalua(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=GBK");
 		Trans trans=new Trans();
@@ -70,16 +63,19 @@ public class stuManage extends HttpServlet {
         		String old=trans.to(req.getParameter("old"));
         		String now=trans.to(req.getParameter("now"));
         		
-        		if(stu.modifyPassword(id, old, now)==true) {
+        		if(now.length()>20)	{
+    				String script = "<script>alert('密码长度大于20，请重新输入');location.href='../mainStudent.jsp'</script>";
+    				response.getWriter().println(script);
+    			}
+        		else if(stu.modifyPassword(id, old, now)==true) {
     				String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
     				response.getWriter().println(script);
-    				return ;
     			}
     			else {
     				String script = "<script>alert('修改密码失败，请重新输入');location.href='../mainStudent.jsp'</script>";
     				response.getWriter().println(script);
-    				return ;
     			}
+        		return ;
             }
             else {
         		HttpSession session=request.getSession();
@@ -94,8 +90,9 @@ public class stuManage extends HttpServlet {
         			
         			String str1="evalua"+i;
         			String str2="dnc"+i;
+        			String str3="eva"+i;
         			if(req.getParameter(str1)!=null) {
-        				String eva=trans.to(req.getParameter("eva"+i)), script=new String();
+        				String eva=trans.to(req.getParameter(str3)), script=new String();
         				
         				if(eva.length()>100) script = "<script>alert('评教内容过长（请输入少于100字）');location.href='../mainStudent.jsp'</script>";
         				else if(eva.length()==0) script = "<script>alert('无评教内容，请重新评教');location.href='../mainStudent.jsp'</script>";
@@ -123,23 +120,30 @@ public class stuManage extends HttpServlet {
         		
         		Stu_homeworkDao stu_homework=new Stu_homeworkDao();
         		List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
-        		for(int i=0; i<hkl.size(); i++) {
+        		
+        		for(int i=0, j=0; i<hkl.size(); i++) {
         			Stu_homework tmp=hkl.get(i);
         			pkeyStu_homework pkey=tmp.getPkey();
         			String cno=pkey.getCourse_no();
         			String hno=pkey.getHomework_no();
         			
+        			if(tmp.getOpinion()!=null)	continue;
+        			
         			String str1="uphwk"+i;
         			String str2="dnhwk"+i;
         			if(req.getParameter(str1)!=null) {
-        				File file=su.getFiles().getFile(i);
-    		        	String ext=file.getFileExt();
-    		        	file.saveAs("/WEB-INF/homework/"+hno+"_"+stu_id+"."+ext);
-    		            
-    		        	stu_homework.modifyFilename(cno, stu_id, hno, hno+"_"+stu_id+"."+ext);
-    		        	
-    		            String script = "<script>alert('上传成功！');location.href='../mainStudent.jsp'</script>";
-    		    		response.getWriter().println(script);
+        				File file=su.getFiles().getFile(j);
+        				if(file.isMissing()) {
+        					String script = "<script>alert('未选择文件！');location.href='../mainStudent.jsp'</script>";
+        		    		response.getWriter().println(script);
+        				}
+        				else {
+        					String ext=file.getFileExt();
+        					file.saveAs("/WEB-INF/homework/"+hno+"_"+stu_id+"."+ext);
+        					stu_homework.modifyFilename(cno, stu_id, hno, hno+"_"+stu_id+"."+ext);
+        					String script = "<script>alert('上传成功！');location.href='../mainStudent.jsp'</script>";
+        					response.getWriter().println(script);
+        				}
     		    		return ;
         			}
         			else if(req.getParameter(str2)!=null) {
@@ -150,6 +154,7 @@ public class stuManage extends HttpServlet {
         				su.downloadFile(dir);
         				return ;
         			}
+        			j++;
         		}
             }
         } catch (SmartUploadException e) {  

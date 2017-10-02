@@ -58,6 +58,35 @@ public class CourseDao {
         return flag;
 	}
 	
+	public boolean deletebyTea_id(String tea_id) {
+		openSession();
+		
+		CoursewareDao cw=new CoursewareDao();
+		Stu_courseDao sc=new Stu_courseDao();
+		Stu_homeworkDao shwk=new Stu_homeworkDao();
+		Tea_homeworkDao thwk=new Tea_homeworkDao();
+		
+		boolean flag=false;
+		Query query =s.createQuery("from Course where tea_id = ?");
+        query.setString(0, tea_id);
+		List<Course> list=query.list();
+		for(int i=0; i<list.size(); i++) {
+			Course p=list.get(i);
+			String cno=p.getCourse_no();
+			
+			cw.deletebyCourse_no(cno);
+			sc.deletebyCourse_no(cno);
+			shwk.deletebyCourse_no(cno);
+			thwk.deletebyCourse_no(cno);
+			
+			s.delete(p);
+			flag=true;
+		}
+		
+		closeSession(flag);
+		return flag;
+	}
+	
 	public boolean findbyCourse_no(String course_no) {
 		openSession();
 		

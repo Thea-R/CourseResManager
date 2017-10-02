@@ -11,7 +11,7 @@
 	List<Teacher> teal=tea.getAll();
 %>
 
-<table width="850px" class="table table-hover">
+<table width="850px" class="table table-hover" style="font-size:18px">
 	<thead>
 		<th width="35%">帐号</th>
 		<th width="35%">姓名</th>

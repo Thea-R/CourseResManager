@@ -11,14 +11,18 @@
 		List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
 %>
 
-<table>
-	<tr>
-		<td>旧密码：</td>
-		<td><input type="password" name="old" size="20"></td>
-	</tr>
-	<tr>
-		<td>新密码：</td>
-		<td><input type="password" name="now" size="20"></td>
-	</tr>
-</table>
-<input type="submit" name="modify_self" value="修改密码">
+<form action="/CMS/servlet/stuManage"
+		enctype="multipart/form-data" method="post">
+<div align="center" style="padding-top: 10px">
+	<br>
+	<div class="input-group">
+        <input type="password" name="old" class="form-control" placeholder="旧密码" required>
+    </div>
+    <br>  
+	<div class="input-group">
+		<input type="password" name="now" class="form-control" placeholder="新密码" required>
+	</div>
+	<br>  
+	<input type="submit" name="modify_self" value="修改密码" class="btn btn-primary">
+</div>
+</form>

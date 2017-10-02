@@ -1,6 +1,7 @@
 package forDao;
 
 import forXml.Course;
+import forXml.Courseware;
 import forXml.Stu_course;
 import forXml.Stu_homework;
 import forXml.Teacher;
@@ -70,6 +71,44 @@ public class Stu_courseDao {
         
         closeSession(flag);
         return flag;
+	}
+	
+	public boolean deletebyStu_id(String stu_id) {
+		openSession();
+		
+		Stu_homeworkDao shwk=new Stu_homeworkDao();
+		
+		boolean flag=false;
+		Query query =s.createQuery("from Stu_course where stu_id = ?");
+        query.setString(0, stu_id);
+		List<Stu_course> list=query.list();
+		for(int i=0; i<list.size(); i++) {
+			Stu_course p=list.get(i);
+			String cno=p.getPkey().getCourse_no();
+			shwk.deletebyCourse_noandStu_id(cno, stu_id);
+			s.delete(p);
+			flag=true;
+		}
+		
+		closeSession(flag);
+		return flag;
+	}
+	
+	public boolean deletebyCourse_no(String cno) {
+		openSession();
+
+		boolean flag=false;
+		Query query =s.createQuery("from Stu_course where course_no = ?");
+        query.setString(0, cno);
+		List<Stu_course> list=query.list();
+		for(int i=0; i<list.size(); i++) {
+			Stu_course p=list.get(i);
+			s.delete(p);
+			flag=true;
+		}
+		
+		closeSession(flag);
+		return flag;
 	}
 	
 	public boolean modifyGrade(pkeyStu_course pkey, Double grade) {

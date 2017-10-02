@@ -8,7 +8,8 @@
 <jsp:useBean id="tea_homework" class="forDao.Tea_homeworkDao" scope="page"></jsp:useBean>
 <jsp:useBean id="stu_homework" class="forDao.Stu_homeworkDao" scope="page"></jsp:useBean>
 
-
+<form action="/CMS/servlet/teaManage"
+		enctype="multipart/form-data" method="post">
 <%
 	String tea_id=(String)request.getSession().getAttribute("id");
 	List<Course> cl=course.getbyTea_id(tea_id);
@@ -76,9 +77,17 @@
 											</button>
 											<h4 class="modal-title">批改</h4>
 										</div>
-										<div class="modal-body">
-											<p>批改意见</p>
-											<input type="textarea" name="op<%=num%>"value="<%=op==null ? "" : op%>">
+										<div class="modal-body" align="center">
+											<table>
+												<tr>
+													<td valign="top">批改意见：</td>
+													<td><div style="width:320px; word-wrap: break-word; word-break: normal"><%=op==null ? "尚未批改" : op%></div></td>
+												</tr>
+												<tr>
+													<td valign="top">更新批改：</td>
+													<td><textarea class="form-control" name="op<%=num%>"></textarea></td>
+												</tr>
+											</table>
 										</div>
 										<div class="modal-footer">
 											<input type="submit" class="btn btn-primary" name="upo<%=num%>" value="提交批改">
@@ -109,5 +118,3 @@
 <%
 	}
 %>
-
-

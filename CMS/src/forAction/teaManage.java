@@ -64,15 +64,12 @@ public class teaManage extends HttpServlet {
         		String id=(String)request.getSession().getAttribute("id");
         		String old=req.getParameter("old");
         		String now=req.getParameter("now");
+        		String script=new String();
         		
-        		if(tea.modifyPassword(id, old, now)==true) {
-        			String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
-        			response.getWriter().println(script);
-        		}
-        		else {
-        			String script = "<script>alert('修改失败，请重新输入');location.href='../mainTeacher.jsp'</script>";
-        			response.getWriter().println(script);
-        		}
+        		if(now.length()>20)	script = "<script>alert('密码长度大于20，请重新输入');location.href='../mainTeacher.jsp'</script>";
+        		else if(tea.modifyPassword(id, old, now)==true) script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
+        		else script = "<script>alert('修改失败，请重新输入');location.href='../mainTeacher.jsp'</script>";
+        		response.getWriter().println(script);
             	return ;
             }
             else {
@@ -95,15 +92,19 @@ public class teaManage extends HttpServlet {
     				
     				if(upc!=null) {
     					File file=su.getFiles().getFile(i);
-    		        	String filename=file.getFileName();
-    		        	String ext=file.getFileExt();
-    		        	file.saveAs("/WEB-INF/courseware/"+cno+"."+ext);
-    		            
-    		        	CoursewareDao cw=new CoursewareDao();
-    		        	cw.modifyFile_title(cno, filename);
-    		        	
-    		            String script = "<script>alert('上传成功！');location.href='../mainTeacher.jsp'</script>";
-    		    		response.getWriter().println(script);
+    					if(file.isMissing()) {
+        					String script = "<script>alert('未选择文件！');location.href='../mainTeacher.jsp'</script>";
+        		    		response.getWriter().println(script);
+        				}
+    					else {
+    						String filename=file.getFileName();
+    						String ext=file.getFileExt();
+    						file.saveAs("/WEB-INF/courseware/"+cno+"."+ext);
+    		        		CoursewareDao cw=new CoursewareDao();
+    		        		cw.modifyFile_title(cno, filename);
+    		        		String script = "<script>alert('上传成功！');location.href='../mainTeacher.jsp'</script>";
+    		        		response.getWriter().println(script);
+    					}
     		    		return ;
     				}
     				else if(dnc!=null) {
@@ -175,6 +176,7 @@ public class teaManage extends HttpServlet {
         				if(req.getParameter(str)!=null) {
         					String grade=trans.to(req.getParameter("gd"+num)), script=new String();
         					if(grade.length()==0)	script = "<script>alert('无评分，请重新评分');location.href='../mainTeacher.jsp'</script>";
+        					else if(trans.db(grade)==false)	script = "<script>alert('非法分数，请重新评分');location.href='../mainTeacher.jsp'</script>";
         					else {
         						stu_course.modifyGrade(pkey, Double.valueOf(grade));
         						script = "<script>alert('评分成功！');location.href='../mainTeacher.jsp'</script>";

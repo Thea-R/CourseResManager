@@ -1,5 +1,6 @@
 package forDao;
 
+import forXml.Courseware;
 import forXml.Stu_homework;
 import forXml.Tea_homework;
 import forXml.pkeyStu_homework;
@@ -63,6 +64,41 @@ public class Stu_homeworkDao {
 		
 		Stu_homework p=(Stu_homework) s.get(Stu_homework.class, pkey);
 		if(p==null) {
+			s.delete(p);
+			flag=true;
+		}
+		
+		closeSession(flag);
+		return flag;
+	}
+	
+	public boolean deletebyCourse_no(String cno) {
+		openSession();
+
+		boolean flag=false;
+		Query query =s.createQuery("from Stu_homework where course_no = ?");
+        query.setString(0, cno);
+		List<Stu_homework> list=query.list();
+		for(int i=0; i<list.size(); i++) {
+			Stu_homework p=list.get(i);
+			s.delete(p);
+			flag=true;
+		}
+		
+		closeSession(flag);
+		return flag;
+	}
+	
+	public boolean deletebyCourse_noandStu_id(String cno, String stu_id) {
+		openSession();
+
+		boolean flag=false;
+		Query query =s.createQuery("from Stu_homework where course_no = ? and stu_id = ?");
+        query.setString(0, cno);
+        query.setString(1, stu_id);
+		List<Stu_homework> list=query.list();
+		for(int i=0; i<list.size(); i++) {
+			Stu_homework p=list.get(i);
 			s.delete(p);
 			flag=true;
 		}

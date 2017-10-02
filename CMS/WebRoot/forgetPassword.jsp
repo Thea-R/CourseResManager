@@ -35,11 +35,11 @@
 			<table>
 				<tr>
 					<td>账号：</td>
-					<td><input type="text" name="id" size="20"></td>
+					<td><input type="text" name="id" size="20" required></td>
 				</tr>
 				<tr>
 					<td>姓名：</td>
-					<td><input type="text" name="name" size="20"></td>
+					<td><input type="text" name="name" size="20" required></td>
 				</tr>
 			</table>
 			<input type="submit" name="submit" value="重置密码"> <a

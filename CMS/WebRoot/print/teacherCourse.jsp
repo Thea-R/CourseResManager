@@ -8,6 +8,7 @@
 	String tea_id=(String)request.getSession().getAttribute("id");
 	List<Course> cl=course.getbyTea_id(tea_id);
 %>
+
 <table width="850px" class="table table-hover">
 	<thead>
 		<th width="35%">课程编号</th>
@@ -36,29 +37,40 @@
 							<button data-dismiss="modal" class="close" type="button">
 								<span aria-hidden="true">×</span> <span class="sr-only">Close</span>
 							</button>
-							<h4 class="modal-title">查看课件</h4>
+							<h4 class="modal-title">查看</h4>
 						</div>
-						<div class="modal-body">
+						<div class="modal-body" align="center">
 							<table>
 								<tr>
-									<td width="200px">课程编号：</td>
-									<td width="450px"><%=cno %></td>
+									<td>课程编号：</td>
+									<td><%=cno %></td>
 								</tr>
 								<tr>
-									<td>原课件：</td>
+									<td align="right">原课件：</td>
 									<%
 									if(filetitle==null) {%>
 										<td>尚未上传课件</td>
 									<%
 									}else{%>
-										<td><input type="submit" class="btn btn-primary"
+										<td><input type="submit" class="btn btn-primary btn-xs"
 										name="dnc<%=i%>" value="<%=filetitle%>"></td>
 									<%
 									}%>
 								</tr>
 								<tr>
-									<td>新课件：</td>
-									<td><input type="file" name="cware<%=i%>"></td>
+									<td align="right">新课件：</td>
+									<td>
+										<input type="file" id="cware<%=i%>" name="cware<%=i%>" class="filestyle" style="display:none">
+										<div class="input-append">  
+											<input id="title<%=i%>" type="text" placeholder="尚未上传文件">  
+											<a onclick="$('input[id=cware<%=i%>]').click();"><input type="button" value="浏览" class="btn btn-xs"></a>  
+										</div>
+										<script type="text/javascript">  
+											$('input[id=cware<%=i%>]').change(function() {  
+											$('#title<%=i%>').val($(this).val());  
+											});  
+										</script>  
+									</td>
 								</tr>
 							</table>
 						</div>

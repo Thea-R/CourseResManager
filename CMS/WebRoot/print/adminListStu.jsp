@@ -11,11 +11,13 @@
 	List<Teacher> teal=tea.getAll();
 %>
 
-<table width="850px" class="table table-hover">
+<form action="/CMS/servlet/admManage" method="post">
+<table width="850px" class="table table-hover" style="font-size:18px">
 	<thead>
 		<th width="30%">学号</th>
 		<th width="30%">姓名</th>
 		<th width="25%">密码</th>
+		<th>操作</th>
 	</thead>
 	<tbody>
 	<%
@@ -42,27 +44,26 @@
 							</button>
 							<h4 class="modal-title">修改信息</h4>
 						</div>
-						<div class="modal-body">
-							<table>
+						<div class="modal-body" align="center">
+							<table style="font-size:18px">
 								<tr>
 									<td>学号：</td>
-									<td width="450px"><%=sid%></td>
+									<td><%=sid%></td>
 								</tr>
 								<tr>
 									<td>姓名：</td>
-									<td><input type="text" name="snm<%=i%>" value=<%=nm%>></td>
+									<td><input type="text" name="snm<%=i%>" value=<%=nm%> required></td>
 								</tr>
 								<tr>
 									<td>密码：</td>
-									<td><input type="password" name="spw<%=i%>" value=<%=pw%>></td>
+									<td><input type="password" name="spw<%=i%>" value=<%=pw%> required></td>
 								</tr>
 							</table>
 						</div>
 						<div class="modal-footer">
-							<input type="submit" name="smod<%=i%>" value="修改"> <input
-								type="submit" name="sdel<%=i%>" value="删除">
-							<button data-dismiss="modal" class="btn btn-default"
-								type="button">关闭</button>
+							<input type="submit" name="smod<%=i%>" value="修改" class="btn btn-success">
+							<input type="submit" name="sdel<%=i%>" value="删除" class="btn btn-danger">
+							<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
 						</div>
 					</div>
 					<!-- /.modal-content -->
@@ -75,10 +76,11 @@
 		}
 	%>
 	<tr>
-		<td><input name="sid_add" type="text"></td>
-		<td><input name="snm_add" type="text"></td>
-		<td><input name="spw_add" type="password"></td>
+		<td><input name="sid_add" type="text" required></td>
+		<td><input name="snm_add" type="text" required></td>
+		<td><input name="spw_add" type="password" required></td>
 		<td><input name="sadd" type="submit" value="添加" class="btn btn-default"></td>
 	</tr>
 	</tbody>
 </table>
+</form>
