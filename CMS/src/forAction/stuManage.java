@@ -23,7 +23,6 @@ import com.jspsmart.upload.SmartUploadException;
 import forDao.CoursewareDao;
 import forDao.Stu_homeworkDao;
 import forDao.TeacherDao;
-import forDao.Trans;
 import forDao.Stu_courseDao;
 import forDao.StudentDao;
 import forXml.Stu_course;
@@ -45,7 +44,6 @@ public class stuManage extends HttpServlet {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=GBK");
-		Trans trans=new Trans();
 
 		SmartUpload su = new SmartUpload();
         Request req = su.getRequest();// 由于multipart/form-data的传输原因，使用smartupload产生的req  
@@ -60,8 +58,8 @@ public class stuManage extends HttpServlet {
             	StudentDao stu=new StudentDao();
         		HttpSession session=request.getSession();
         		String id=(String)session.getAttribute("id");
-        		String old=trans.to(req.getParameter("old"));
-        		String now=trans.to(req.getParameter("now"));
+        		String old=req.getParameter("old");
+        		String now=req.getParameter("now");
         		String script=new String();
         		
         		if(stu.modifyPassword(id, old, now)==true) script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";

@@ -24,7 +24,6 @@ import forDao.Stu_homeworkDao;
 import forDao.StudentDao;
 import forDao.Tea_homeworkDao;
 import forDao.TeacherDao;
-import forDao.Trans;
 import forXml.Course;
 import forXml.Stu_course;
 import forXml.Stu_homework;
@@ -48,7 +47,6 @@ public class teaManage extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=GBK");
 		
-		Trans trans=new Trans();
 		SmartUpload su = new SmartUpload();
         Request req = su.getRequest();// 由于multipart/form-data的传输原因，使用smartupload产生的req  
         PageContext pageContext = JspFactory.getDefaultFactory().getPageContext(this, request, response, null, true, 8192, true);  
@@ -178,11 +176,8 @@ public class teaManage extends HttpServlet {
         				String str="sgd"+num;
         				if(req.getParameter(str)!=null) {
         					String grade=req.getParameter("gd"+num), script=new String();
-        					if(trans.db(grade)==false)	script = "<script>alert('非法分数，请重新评分');location.href='../mainTeacher.jsp'</script>";
-        					else {
-        						stu_course.modifyGrade(pkey, Double.valueOf(grade));
-        						script = "<script>alert('评分成功！');location.href='../mainTeacher.jsp'</script>";
-        					}
+        					stu_course.modifyGrade(pkey, Double.valueOf(grade));
+        					script = "<script>alert('评分成功！');location.href='../mainTeacher.jsp'</script>";
         					response.getWriter().println(script);
         					return ;
          				}

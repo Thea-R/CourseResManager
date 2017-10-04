@@ -28,14 +28,41 @@
 				String stu_id=pkey.getStu_id();
 				Student sdt=student.getbyId(stu_id);
 				String nm=sdt.getName();
+				
+				int num=i*scl.size()+j;
 	%>
 				<tr>
 					<td><%=stu_id %></td>
 					<td><%=nm %></td>
-					<td><input type="text" name="gd<%=i*scl.size()+j %>" value="<%=grade==null ? "" : grade %>"></td>
-					<td><input type="submit" name="sgd<%=i*scl.size()+j %>" value="提交成绩" class="btn btn-primary"></td>
+					<td><input type="text" name="gd<%=num%>" value="<%=grade==null ? "" : grade %>"></td>
+					<script language="javascript">
+					function validateNum(val){//验证整数
+						var patten = /^-?\d+$/;
+						return patten.test(val);
+					}
+					function validateDBNum(val){//验证小数，保留一位小数点
+						var patten = /^-?\d+\.?\d{0,1}$/;
+						return patten.test(val);
+					}
+					function db<%=num%>(){
+						var num=teaManage.gd<%=num%>.value;
+						if(num=="") {
+							alert("无成绩，请重新评分");
+							return false;
+						}
+						if(num.indexOf("-")!=-1) {
+							alert("非法分数，请重新评分");
+							return false;
+						}
+						if(validateNum(num)==true && num.length<=3)	return true;
+						if(validateNum(num)==false && validateDBNum(num)==true && num.length<=4)	return true;
+						alert("非法分数，请重新评分");
+						return false;
+					}
+					</script>
+					<td><input type="submit" name="sgd<%=num%>" value="提交成绩" class="btn btn-primary" onclick="return db<%=num%>();"></td>
 				</tr>
-	<%	
+	<%
 			}
 	%>
 				</tbody>
