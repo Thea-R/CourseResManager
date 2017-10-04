@@ -48,7 +48,7 @@ body {
 		}
 		window.setInterval("printTime();", 1000);
 	</script>
-	<nav class="navbar navbar-default navbar-fixed-bottom">
+	<nav class="navbar navbar-default navbar-fixed-bottom" style="background: #757f9a">
 	<p id="dt" style="position:absolute; top:5px; right:5%"></p>
 	<p align="center" style="margin-top:12px; font-size: 16px">beta1.0
 		by : ff && rsl</p>

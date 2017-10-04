@@ -62,19 +62,11 @@ public class stuManage extends HttpServlet {
         		String id=(String)session.getAttribute("id");
         		String old=trans.to(req.getParameter("old"));
         		String now=trans.to(req.getParameter("now"));
+        		String script=new String();
         		
-        		if(now.length()>20)	{
-    				String script = "<script>alert('密码长度大于20，请重新输入');location.href='../mainStudent.jsp'</script>";
-    				response.getWriter().println(script);
-    			}
-        		else if(stu.modifyPassword(id, old, now)==true) {
-    				String script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
-    				response.getWriter().println(script);
-    			}
-    			else {
-    				String script = "<script>alert('修改密码失败，请重新输入');location.href='../mainStudent.jsp'</script>";
-    				response.getWriter().println(script);
-    			}
+        		if(stu.modifyPassword(id, old, now)==true) script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
+    			else script = "<script>alert('修改密码失败，请重新输入');location.href='../mainStudent.jsp'</script>";
+        		response.getWriter().println(script);
         		return ;
             }
             else {
@@ -92,11 +84,9 @@ public class stuManage extends HttpServlet {
         			String str2="dnc"+i;
         			String str3="eva"+i;
         			if(req.getParameter(str1)!=null) {
-        				String eva=trans.to(req.getParameter(str3)), script=new String();
+        				String eva=req.getParameter(str3), script=new String();
         				
-        				if(eva.length()>100) script = "<script>alert('评教内容过长（请输入少于100字）');location.href='../mainStudent.jsp'</script>";
-        				else if(eva.length()==0) script = "<script>alert('无评教内容，请重新评教');location.href='../mainStudent.jsp'</script>";
-        				else if(stu_course.modifyTea_evaluation(pkey, eva)==true) script = "<script>alert('评教成功');location.href='../mainStudent.jsp'</script>";
+        				if(stu_course.modifyTea_evaluation(pkey, eva)==true) script = "<script>alert('评教成功');location.href='../mainStudent.jsp'</script>";
         				else script = "<script>alert('评教失败，请重新评教');location.href='../mainStudent.jsp'</script>";
         				
         				response.getWriter().println(script);
@@ -138,6 +128,10 @@ public class stuManage extends HttpServlet {
         		    		response.getWriter().println(script);
         				}
         				else {
+        					String savePath = getServletContext().getRealPath("/")+"WEB-INF/homework";
+            		        java.io.File f = new java.io.File(savePath);
+            		        if (!f.exists() && !f.isDirectory()) f.mkdir();
+        					
         					String ext=file.getFileExt();
         					file.saveAs("/WEB-INF/homework/"+hno+"_"+stu_id+"."+ext);
         					stu_homework.modifyFilename(cno, stu_id, hno, hno+"_"+stu_id+"."+ext);

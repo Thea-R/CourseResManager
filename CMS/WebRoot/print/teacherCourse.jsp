@@ -28,7 +28,7 @@
 		<td><%=title %></td>
 		<td>
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#myModal<%=i%>">查看课件</button>
+				data-target="#myModal<%=i%>">查看</button>
 			<div class="modal fade" id="myModal<%=i%>" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog">
@@ -37,7 +37,7 @@
 							<button data-dismiss="modal" class="close" type="button">
 								<span aria-hidden="true">×</span> <span class="sr-only">Close</span>
 							</button>
-							<h4 class="modal-title">查看</h4>
+							<h4 class="modal-title">查看课件</h4>
 						</div>
 						<div class="modal-body" align="center">
 							<table>
@@ -52,7 +52,7 @@
 										<td>尚未上传课件</td>
 									<%
 									}else{%>
-										<td><input type="submit" class="btn btn-primary btn-xs"
+										<td><input type="submit" class="btn btn-info btn-xs"
 										name="dnc<%=i%>" value="<%=filetitle%>"></td>
 									<%
 									}%>

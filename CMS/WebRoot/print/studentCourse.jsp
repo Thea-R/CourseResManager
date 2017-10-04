@@ -12,8 +12,6 @@
 	List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
 %>
 
-<form action="/CMS/servlet/stuManage"
-		enctype="multipart/form-data" method="post">
 <table width="850px" class="table table-hover" style="font-size:18px">
 	<thead>
 		<th width="20%">课程编号</th>
@@ -41,7 +39,7 @@
 		<td><%=grade==null ? "尚无成绩" : grade%></td>
 		<td>
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#myEva<%=i%>">评教</button>
+				data-target="#myEva<%=i%>">查看</button>
 			<div class="modal fade" id="myEva<%=i%>" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel">
 				<div class="modal-dialog">
@@ -73,10 +71,21 @@
 							</table>
 						</div>
 						<div class="modal-footer">
-							<input type="submit" class="btn btn-primary" name="evalua<%=i%>"
-								value="提交评教">
-							<button data-dismiss="modal" class="btn btn-default"
-								type="button">关闭</button>
+							<script language="javascript">
+							function mdEva<%=i%> () {
+								if (stuManage.eva<%=i%>.value=="") {
+									alert("信息填写不完整，请重新输入");
+									return false;
+								}
+								if (stuManage.eva<%=i%>.value.length>100) {
+									alert("信息超过100个字符，请重新输入");
+									return false;
+								}
+								return true;
+							}
+							</script>
+							<input type="submit" name="evalua<%=i%>" value="提交评教" onclick="return mdEva<%=i%>();" class="btn btn-primary">
+							<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
 						</div>
 					</div>
 					<!-- /.modal-content -->
@@ -94,17 +103,15 @@
 		<%
 			}else{
 		%>
-		<td><input type="submit" class="btn btn-primary" name="dnc<%=i%>"
+		<td><input type="submit" class="btn btn-info" name="dnc<%=i%>"
 			value="下载"></td>
 		<%
 			}
 		%>
 		</td>
-
 	</tr>
 	<%
 		}
 	%>
 	</tbody>
 </table>
-</form>

@@ -102,6 +102,7 @@ public class Tea_homeworkDao {
 			int tnum=Integer.parseInt(tmp);
 			num= tnum>num ? tnum : num;
 		}
+		num++;
 		
 		String tmp=num+"";
 		for(int i=0; i<4-tmp.length(); i++) nxt=nxt+"0";

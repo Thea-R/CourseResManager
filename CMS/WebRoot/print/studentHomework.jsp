@@ -11,8 +11,6 @@
 	List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
 %>
 
-<form action="/CMS/servlet/stuManage"
-		enctype="multipart/form-data" method="post">
 <table width="850px" class="table table-hover" style="font-size:18px">
 	<thead>
 		<th width="20%">课程编号</th>
@@ -138,7 +136,7 @@
 							%>
 								<tr>
 									<td align="right">原作业：</td>
-									<td><input type="submit" class="btn btn-primary btn-xs"
+									<td><input type="submit" class="btn btn-info btn-xs"
 										name="dnhwk<%=i%>" value="<%=filename%>"></td></td>
 								</tr>
 							<% 
@@ -195,4 +193,3 @@
 	%>
 	</tbody>
 </table>
-</form>

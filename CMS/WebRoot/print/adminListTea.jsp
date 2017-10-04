@@ -11,7 +11,6 @@
 	List<Teacher> teal=tea.getAll();
 %>
 
-<form action="/CMS/servlet/admManage" method="post">
 <table width="850px" class="table table-hover" style="font-size:18px">
 	<thead>
 		<th width="30%">工号</th>
@@ -53,16 +52,29 @@
 								</tr>
 								<tr>
 									<td>姓名：</td>
-									<td><input type="text" name="tnm<%=i%>" value=<%=nm%> required></td>
+									<td><input type="text" name="tnm<%=i%>" value=<%=nm%>></td>
 								</tr>
 								<tr>
 									<td>密码：</td>
-									<td><input type="password" name="tpw<%=i%>" value=<%=pw%> required></td>
+									<td><input type="password" name="tpw<%=i%>" value=<%=pw%>></td>
 								</tr>
 							</table>
 						</div>
 						<div class="modal-footer">
-							<input type="submit" name="tmod<%=i%>" value="修改" class="btn btn-success">
+							<script language="javascript">
+							function tMod<%=i%> () {
+								if (admManage.tnm<%=i%>.value=="" || admManage.tpw<%=i%>.value=="") {
+									alert("信息填写不完整，请重新输入");
+									return false;
+								}
+								if (admManage.tnm<%=i%>.value.length>20 || admManage.tpw<%=i%>.value.length>20) {
+									alert("信息超过20个字符，请重新输入");
+									return false;
+								}
+								return true;
+							}
+							</script>
+							<input type="submit" name="tmod<%=i%>" value="修改" onclick="return tMod<%=i%>();" class="btn btn-success">
 							<input type="submit" name="tdel<%=i%>" value="删除" class="btn btn-danger">
 							<button data-dismiss="modal" class="btn btn-default" type="button" >关闭</button>
 						</div>
@@ -78,11 +90,23 @@
 	%>
 
 	<tr>
-		<td><input name="tid_add" type="text" required></td>
-		<td><input name="tnm_add" type="text" required></td>
-		<td><input name="tpw_add" type="password" required></td>
-		<td><input name="tadd" type="submit" value="添加" class="btn btn-default"></td>
+		<script language="javascript">
+		function addT () {
+			if (admManage.tid_add.value=="" || admManage.tnm_add.value=="" || admManage.tpw_add.value=="") {
+				alert("信息填写不完整，请重新输入");
+				return false;
+			}
+			if (admManage.tid._add.value.length>20 || admManage.tnm_add.value.length>20 || admManage.tpw_add.value.length>20) {
+				alert("信息超过20个字符，请重新输入");
+				return false;
+			}
+			return true;
+		}
+		</script>
+		<td><input name="tid_add" type="text"></td>
+		<td><input name="tnm_add" type="text"></td>
+		<td><input name="tpw_add" type="password"></td>
+		<td><input name="tadd" type="submit" value="添加" onclick="return addT();" class="btn btn-default"></td>
 	</tr>
 	</tbody>
 </table>
-</form>

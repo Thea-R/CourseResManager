@@ -13,7 +13,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>课程资源管理系统</title>
+<title>课程资源管理系统 - 学生页面</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -28,10 +28,14 @@
 <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body style="background: #757f9a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #757f9a, #d7dde8); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #757f9a, #d7dde8);">
 	<jsp:include page="header.jsp" />
 	<jsp:include page="filterStudent.jsp" />
 
+<form name="stuManage" action="/CMS/servlet/stuManage"
+		enctype="multipart/form-data" method="post">
 	<div class="container" style="width:850px">
 		<ul id="myTab" class="nav nav-tabs">
 			<li class="active"><a href="#course" data-toggle="tab"><h4>课程</h4></a></li>
@@ -53,6 +57,7 @@
 			</div>
 		</div>
 	</div>
+</form>
 
 	<jsp:include page="footer.jsp" />
 </body>

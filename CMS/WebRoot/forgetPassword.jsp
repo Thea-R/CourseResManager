@@ -13,7 +13,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>课程资源管理系统</title>
+<title>课程资源管理系统 - 重置密码</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -28,24 +28,41 @@
 <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body style="background: #757f9a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #757f9a, #d7dde8); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #757f9a, #d7dde8);">
 	<jsp:include page="header.jsp" />
+	
+	<div class="container" style="width: 400px; padding-top: 100px">
 	<form name="reset" action="/CMS/servlet/resetPassword" method="post">
 		<div align="center">
-			<table>
-				<tr>
-					<td>账号：</td>
-					<td><input type="text" name="id" size="20" required></td>
-				</tr>
-				<tr>
-					<td>姓名：</td>
-					<td><input type="text" name="name" size="20" required></td>
-				</tr>
-			</table>
-			<input type="submit" name="submit" value="重置密码"> <a
-				href="index.jsp"><input type="button" value="返回"></a>
+			<div class="input-group input-group-lg">
+            	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" name="id" class="form-control" placeholder="账号" autofocus>
+            </div>
+            <br>  
+            	
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-cloud"></i></span>
+                <input type="text" name="name" class="form-control" placeholder="姓名">
+            </div>
+            <br>
+			
+			<script language="javascript">
+			function check () {
+				if (reset.id.value=="" || reset.name.value=="") {
+					alert("信息填写不完整，请重新输入");
+					return false;
+				}
+				return true;
+			}
+			</script>
+			
+			<a href="index.jsp"><input type="button" class="btn btn-default" value="返回" style="float: right"></a>
+			<input class="btn btn-primary" type="submit" name="submit" value="重置密码" style="float: right" onclick="return check();">
 		</div>
 	</form>
+	</div>
 
 	<jsp:include page="footer.jsp" />
 </body>

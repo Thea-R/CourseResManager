@@ -8,8 +8,6 @@
 <jsp:useBean id="tea_homework" class="forDao.Tea_homeworkDao" scope="page"></jsp:useBean>
 <jsp:useBean id="stu_homework" class="forDao.Stu_homeworkDao" scope="page"></jsp:useBean>
 
-<form action="/CMS/servlet/teaManage"
-		enctype="multipart/form-data" method="post">
 <%
 	String tea_id=(String)request.getSession().getAttribute("id");
 	List<Course> cl=course.getbyTea_id(tea_id);
@@ -30,20 +28,21 @@
 			int sum=i*thk.size()+k;
 			List<Stu_homework> shk=stu_homework.getbyHomework_no(hno);
 %>			<div class="panel panel-default">
-    			<div class="panel-heading" role="tab" id="heading<%=sum%>">
-   				   	<h4 class="panel-title">
+    			<div class="panel-heading" role="tab" id="heading<%=sum%>" style="background: #757F9A">
+   				   	<h3 class="panel-title" style="font-size: 20px">
           				<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion<%=i%>" 
           					href="#collapse<%=sum%>" aria-expanded="false" aria-controls="collapse<%=sum%>">
-          					<%=hno %>
+          					<strong><%=hno %></strong>
     				    </a>
-      				</h4>
+      				</h3>
     			</div>
-    			<div id="collapse<%=sum%>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<%=sum%>">
+    			<div id="collapse<%=sum%>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<%=sum%>" style="background: #D7DDE8">
       				<div class="panel-body">
 			<table width="850px" class="table table-hover">
-				<thead><th width="20%">学号</th><th width="20%">姓名</th><th width="40%">作业</th><th></th></thead>
+				<thead><th width="20%">学号</th><th width="20%">姓名</th><th width="40%">作业</th><th>批改</th></thead>
 				<tbody>
 <%
+			int cnt=0;
 			for(int j=0; j<shk.size (); j++) {
 				Stu_homework hk=shk.get(j);
 				String filename=(hk.getFilename()==null ? null : hk.getFilename().toString());
@@ -59,9 +58,10 @@
 					<td><%=nm %></td>
 					<%
 						if(filename==null) {
+							++cnt;
 					%>
-						<td><input type="button" class="btn btn-diabled" value="尚未提交"></td>
-						<td><input type="button" class="btn btn-disabled" value="批改"></td>
+						<td><input type="button" class="btn btn-disabled" value="尚未提交"></td>
+						<td><input type="button" class="btn btn-disabled" value="查看"></td>
 					<% 	}
 						else {
 					%>
@@ -90,7 +90,20 @@
 											</table>
 										</div>
 										<div class="modal-footer">
-											<input type="submit" class="btn btn-primary" name="upo<%=num%>" value="提交批改">
+											<script language="javascript">
+											function mdOp<%=num%> () {
+												if (teaManage.op<%=num%>.value=="") {
+													alert("信息填写不完整，请重新输入");
+													return false;
+												}
+												if (teaManage.op<%=num%>.value.length>100) {
+													alert("信息超过100个字符，请重新输入");
+													return false;
+												}
+												return true;
+											}
+											</script>
+											<input type="submit" name="upo<%=num%>" value="提交批改" onclick="return mdOp<%=num%>();" class="btn btn-primary">
 											<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
 										</div>
 									</div><!-- /.modal-content -->
@@ -104,6 +117,12 @@
 <%	
 			}
 %>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>尚未提交：<%=cnt%>人</td>
+				</tr>
 				</tbody>
 			</table>
 					</div>

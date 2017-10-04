@@ -66,8 +66,7 @@ public class teaManage extends HttpServlet {
         		String now=req.getParameter("now");
         		String script=new String();
         		
-        		if(now.length()>20)	script = "<script>alert('密码长度大于20，请重新输入');location.href='../mainTeacher.jsp'</script>";
-        		else if(tea.modifyPassword(id, old, now)==true) script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
+        		if(tea.modifyPassword(id, old, now)==true) script = "<script>alert('修改密码成功，请重新登录');location.href='../index.jsp'</script>";
         		else script = "<script>alert('修改失败，请重新输入');location.href='../mainTeacher.jsp'</script>";
         		response.getWriter().println(script);
             	return ;
@@ -97,6 +96,10 @@ public class teaManage extends HttpServlet {
         		    		response.getWriter().println(script);
         				}
     					else {
+    						String savePath = getServletContext().getRealPath("/")+"WEB-INF/courseware";
+    		                java.io.File f = new java.io.File(savePath);
+    		                if (!f.exists() && !f.isDirectory()) f.mkdir();
+    						
     						String filename=file.getFileName();
     						String ext=file.getFileExt();
     						file.saveAs("/WEB-INF/courseware/"+cno+"."+ext);
@@ -157,7 +160,7 @@ public class teaManage extends HttpServlet {
             					return ;
             				}
             				else if(req.getParameter(str2)!=null) {
-            					String op=trans.to(req.getParameter("op"+num));
+            					String op=req.getParameter("op"+num);
             					stu_homework.modifyOpinion(cno, stu_id, hno, op);
             					String script = "<script>alert('批改成功！');location.href='../mainTeacher.jsp'</script>";
             		    		response.getWriter().println(script);
@@ -174,9 +177,8 @@ public class teaManage extends HttpServlet {
             			int num=i*scl.size()+j;
         				String str="sgd"+num;
         				if(req.getParameter(str)!=null) {
-        					String grade=trans.to(req.getParameter("gd"+num)), script=new String();
-        					if(grade.length()==0)	script = "<script>alert('无评分，请重新评分');location.href='../mainTeacher.jsp'</script>";
-        					else if(trans.db(grade)==false)	script = "<script>alert('非法分数，请重新评分');location.href='../mainTeacher.jsp'</script>";
+        					String grade=req.getParameter("gd"+num), script=new String();
+        					if(trans.db(grade)==false)	script = "<script>alert('非法分数，请重新评分');location.href='../mainTeacher.jsp'</script>";
         					else {
         						stu_course.modifyGrade(pkey, Double.valueOf(grade));
         						script = "<script>alert('评分成功！');location.href='../mainTeacher.jsp'</script>";

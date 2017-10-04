@@ -20,6 +20,20 @@
 	<div class="input-group">
 		<input type="password" name="now" class="form-control" placeholder="新密码">
 	</div>
-	<br>  
-	<input type="submit" name="modify_self" value="修改密码" class="btn btn-primary">
+	<br>
+	
+	<script language="javascript">
+	function mdSelf () {
+		if (teaManage.old.value=="" || teaManage.now.value=="") {
+			alert("信息填写不完整，请重新输入");
+			return false;
+		}
+		if (teaManage.old.value.length>20 || teaManage.now.value.length>20) {
+			alert("信息超过20个字符，请重新输入");
+			return false;
+		}
+		return true;
+	}
+	</script>
+	<input type="submit" name="modify_self" value="修改密码" onclick="return mdSelf();" class="btn btn-primary">
 </div>
