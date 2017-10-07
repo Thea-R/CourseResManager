@@ -12,14 +12,14 @@
 	List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
 %>
 
-<table width="850px" class="table table-hover" style="font-size:18px">
+<table width="850px" class="table table-hover" style="font-size:18px; border: 1px solid black">
 	<thead>
-		<th width="20%">课程编号</th>
-		<th width="20%">课程名字</th>
-		<th width="20%">任课教师</th>
-		<th width="20%">课程成绩</th>
-		<th width="10%">评教</th>
-		<th>课件</th>
+		<th width="20%" style="border: 1px solid black">课程编号</th>
+		<th width="20%" style="border: 1px solid black">课程名字</th>
+		<th width="20%" style="border: 1px solid black">任课教师</th>
+		<th width="20%" style="border: 1px solid black">课程成绩</th>
+		<th width="10%" style="border: 1px solid black">评教</th>
+		<th style="border: 1px solid black">课件</th>
 	</thead>
 	<tbody>
 	<%
@@ -33,11 +33,11 @@
 			String eva=tmp.getTea_evaluation();
 	%>
 	<tr>
-		<td><%=cno%></td>
-		<td><%=title%></div>
-		<td><%=tname%></td>
-		<td><%=grade==null ? "尚无成绩" : grade%></td>
-		<td>
+		<td style="border: 1px solid black"><%=cno%></td>
+		<td style="border: 1px solid black"><%=title%></div>
+		<td style="border: 1px solid black"><%=tname%></td>
+		<td style="border: 1px solid black"><%=grade==null ? "尚无成绩" : grade%></td>
+		<td style="border: 1px solid black">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#myEva<%=i%>">查看</button>
 			<div class="modal fade" id="myEva<%=i%>" tabindex="-1" role="dialog"
@@ -99,11 +99,11 @@
 			String filetitle=cw.getFile_title();
 			if(filetitle==null) {
 		%>
-		<td><input type="button" value="尚无" class="btn disabled"></td>
+		<td style="border: 1px solid black"><input type="button" value="尚无" class="btn disabled"></td>
 		<%
 			}else{
 		%>
-		<td><input type="submit" class="btn btn-info" name="dnc<%=i%>"
+		<td style="border: 1px solid black"><input type="submit" class="btn btn-info" name="dnc<%=i%>"
 			value="下载"></td>
 		<%
 			}

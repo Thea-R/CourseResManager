@@ -28,9 +28,10 @@
 <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 </head>
 
-<body style="background: #757f9a; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #757f9a, #d7dde8); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #757f9a, #d7dde8);">
+<body style="background: #E0EAFC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+">
 	<jsp:include page="header.jsp" />
 	<jsp:include page="filterAdmin.jsp" />
 

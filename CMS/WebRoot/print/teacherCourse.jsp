@@ -9,11 +9,11 @@
 	List<Course> cl=course.getbyTea_id(tea_id);
 %>
 
-<table width="850px" class="table table-hover">
+<table width="850px" class="table table-hover" style="border: 1px solid black">
 	<thead>
-		<th width="35%">课程编号</th>
-		<th width="35%">课程名字</th>
-		<th>课件</th>
+		<th width="35%" style="border: 1px solid black">课程编号</th>
+		<th width="35%" style="border: 1px solid black">课程名字</th>
+		<th style="border: 1px solid black">课件</th>
 	</thead>
 	<tbody>
 	<%
@@ -24,9 +24,9 @@
 			String filetitle=courseware.getbyCourse_no(cno).getFile_title();
 	%>
 	<tr>
-		<td><%=cno %></td>
-		<td><%=title %></td>
-		<td>
+		<td style="border: 1px solid black"><%=cno %></td>
+		<td style="border: 1px solid black"><%=title %></td>
+		<td style="border: 1px solid black">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#myModal<%=i%>">查看</button>
 			<div class="modal fade" id="myModal<%=i%>" tabindex="-1"

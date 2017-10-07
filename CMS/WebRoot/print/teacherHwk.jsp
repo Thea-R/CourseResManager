@@ -28,7 +28,7 @@
 			int sum=i*thk.size()+k;
 			List<Stu_homework> shk=stu_homework.getbyHomework_no(hno);
 %>			<div class="panel panel-default">
-    			<div class="panel-heading" role="tab" id="heading<%=sum%>" style="background: #757F9A">
+    			<div class="panel-heading" role="tab" id="heading<%=sum%>" style="background: #83a4d4">
    				   	<h3 class="panel-title" style="font-size: 20px">
           				<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion<%=i%>" 
           					href="#collapse<%=sum%>" aria-expanded="false" aria-controls="collapse<%=sum%>">
@@ -36,10 +36,15 @@
     				    </a>
       				</h3>
     			</div>
-    			<div id="collapse<%=sum%>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<%=sum%>" style="background: #D7DDE8">
+    			<div id="collapse<%=sum%>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<%=sum%>" style="background: #83a4d4">
       				<div class="panel-body">
 			<table width="850px" class="table table-hover">
-				<thead><th width="20%">学号</th><th width="20%">姓名</th><th width="40%">作业</th><th>批改</th></thead>
+				<thead>
+					<th width="20%" style="border: 1px solid black">学号</th>
+					<th width="20%" style="border: 1px solid black">姓名</th>
+					<th width="40%" style="border: 1px solid black">作业</th>
+					<th style="border: 1px solid black">批改</th>
+				</thead>
 				<tbody>
 <%
 			int cnt=0;
@@ -54,19 +59,19 @@
 				int num=i*thk.size()*shk.size()+k*shk.size()+j;
 %>
 				<tr>
-					<td><%=stu_id %></td>
-					<td><%=nm %></td>
+					<td style="border: 1px solid black"><%=stu_id %></td>
+					<td style="border: 1px solid black"><%=nm %></td>
 					<%
 						if(filename==null) {
 							++cnt;
 					%>
-						<td><input type="button" class="btn btn-disabled" value="尚未提交"></td>
-						<td><input type="button" class="btn btn-disabled" value="查看"></td>
+						<td style="border: 1px solid black"><input type="button" class="btn btn-disabled" value="尚未提交"></td>
+						<td style="border: 1px solid black"><input type="button" class="btn btn-disabled" value="查看"></td>
 					<% 	}
 						else {
 					%>
-						<td><input type="submit" name="dnhwk<%=num%>" value="<%=filename%>" class="btn btn-info"></td>
-						<td>
+						<td style="border: 1px solid black"><input type="submit" name="dnhwk<%=num%>" value="<%=filename%>" class="btn btn-info"></td>
+						<td style="border: 1px solid black">
 							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myOpinion<%=num%>">批改</button>
 							<div class="modal fade" id="myOpinion<%=num%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog">

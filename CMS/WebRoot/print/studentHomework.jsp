@@ -11,13 +11,13 @@
 	List<Stu_homework> hkl=stu_homework.getbyStu_id(stu_id);
 %>
 
-<table width="850px" class="table table-hover" style="font-size:18px">
+<table width="850px" class="table table-hover" style="font-size:18px; border: 1px solid black">
 	<thead>
-		<th width="20%">课程编号</th>
-		<th width="20%">课程名字</th>
-		<th width="20%">作业编号</th>
-		<th width="20%">批改意见</th>
-		<th>提交作业</th>
+		<th width="20%" style="border: 1px solid black">课程编号</th>
+		<th width="20%" style="border: 1px solid black">课程名字</th>
+		<th width="20%" style="border: 1px solid black">作业编号</th>
+		<th width="20%" style="border: 1px solid black">批改意见</th>
+		<th style="border: 1px solid black">提交作业</th>
 	</thead>
 	<tbody>
 	<%
@@ -32,18 +32,18 @@
 			String opinion=tmp.getOpinion();
 	%>
 	<tr>
-		<td><%=cno%></td>
-		<td><%=title%></td>
-		<td><%=hno%></td>
+		<td style="border: 1px solid black"><%=cno%></td>
+		<td style="border: 1px solid black"><%=title%></td>
+		<td style="border: 1px solid black"><%=hno%></td>
 		<%
 			if(op==null) {
 		%>
-		<td><input type="button" value="尚无" class="btn disabled"></td>
+		<td style="border: 1px solid black"><input type="button" value="尚无" class="btn disabled"></td>
 		<%
 			}
 			else {
 		%>
-		<td>
+		<td style="border: 1px solid black">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#myOp<%=i%>">查看</button>
 			<div class="modal fade" id="myOp<%=i%>" tabindex="-1"
@@ -84,7 +84,7 @@
 		</td>
 		<% } %>
 		
-		<td>
+		<td style="border: 1px solid black">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#myHwk<%=i%>">查看</button>
 			<div class="modal fade" id="myHwk<%=i%>" tabindex="-1"

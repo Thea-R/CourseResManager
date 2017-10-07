@@ -11,11 +11,11 @@
 	List<Teacher> teal=tea.getAll();
 %>
 
-<table width="850px" class="table table-hover" style="font-size:18px">
+<table width="850px" class="table table-hover" style="font-size:18px; border: 1px solid black">
 	<thead>
-		<th width="35%">帐号</th>
-		<th width="35%">姓名</th>
-		<th>身份</th>
+		<th width="35%" style="border: 1px solid black">帐号</th>
+		<th width="35%" style="border: 1px solid black">姓名</th>
+		<th style="border: 1px solid black">身份</th>
 	</thead>
 	<tbody>
 	<%
@@ -23,9 +23,9 @@
 		Admin tmp=adml.get(i);
 	%>
 	<tr>
-		<td><%=tmp.getAdm_id()%></td>
-		<td>---</td>
-		<td>管理员</td>
+		<td style="border: 1px solid black"><%=tmp.getAdm_id()%></td>
+		<td style="border: 1px solid black">---</td>
+		<td style="border: 1px solid black">管理员</td>
 	</tr>
 	<%
 		}
@@ -33,9 +33,9 @@
 		Student tmp=stul.get(i);
 	%>
 	<tr>
-		<td><%=tmp.getStu_id()%></td>
-		<td><%=tmp.getName()%></td>
-		<td>学生</td>
+		<td style="border: 1px solid black"><%=tmp.getStu_id()%></td>
+		<td style="border: 1px solid black"><%=tmp.getName()%></td>
+		<td style="border: 1px solid black">学生</td>
 	</tr>
 	<%
 		}
@@ -43,9 +43,9 @@
 		Teacher tmp=teal.get(i);
 	%>
 	<tr>
-		<td><%=tmp.getTea_id()%></td>
-		<td><%=tmp.getName()%></td>
-		<td>教师</td>
+		<td style="border: 1px solid black"><%=tmp.getTea_id()%></td>
+		<td style="border: 1px solid black"><%=tmp.getName()%></td>
+		<td style="border: 1px solid black">教师</td>
 	</tr>
 	<%
 		}

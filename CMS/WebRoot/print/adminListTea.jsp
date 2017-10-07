@@ -11,12 +11,12 @@
 	List<Teacher> teal=tea.getAll();
 %>
 
-<table width="850px" class="table table-hover" style="font-size:18px">
+<table width="850px" class="table table-hover" style="font-size:18px; border: 1px solid black">
 	<thead>
-		<th width="30%">工号</th>
-		<th width="30%">姓名</th>
-		<th width="25%">密码</th>
-		<th>操作</th>
+		<th width="30%" style="border: 1px solid black">工号</th>
+		<th width="30%" style="border: 1px solid black">姓名</th>
+		<th width="25%" style="border: 1px solid black">密码</th>
+		<th style="border: 1px solid black">操作</th>
 	</thead>
 	<tbody>
 	<%
@@ -27,11 +27,10 @@
 		String pw=tmp.getPassword();
 	%>
 	<tr>
-		<td><%=tid%></td>
-		<td><%=nm%></td>
-		<td><%=pw%></td>
-
-		<td>
+		<td style="border: 1px solid black"><%=tid%></td>
+		<td style="border: 1px solid black"><%=nm%></td>
+		<td style="border: 1px solid black"><%=pw%></td>
+		<td style="border: 1px solid black">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#mdtea<%=i%>">修改</button>
 			<div class="modal fade" id="mdtea<%=i%>" tabindex="-1" role="dialog"
@@ -103,10 +102,10 @@
 			return true;
 		}
 		</script>
-		<td><input name="tid_add" type="text"></td>
-		<td><input name="tnm_add" type="text"></td>
-		<td><input name="tpw_add" type="password"></td>
-		<td><input name="tadd" type="submit" value="添加" onclick="return addT();" class="btn btn-default"></td>
+		<td style="border: 1px solid black"><input name="tid_add" type="text"></td>
+		<td style="border: 1px solid black"><input name="tnm_add" type="text"></td>
+		<td style="border: 1px solid black"><input name="tpw_add" type="password"></td>
+		<td style="border: 1px solid black"><input name="tadd" type="submit" value="添加" onclick="return addT();" class="btn btn-default"></td>
 	</tr>
 	</tbody>
 </table>
