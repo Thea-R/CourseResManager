@@ -113,7 +113,13 @@ public class teaManage extends HttpServlet {
     					String filename=cw.getbyCourse_no(cno).getFile_title();
     					String dir1=getServletContext().getRealPath("/")+"WEB-INF/courseware/"+cno+filename.substring(filename.lastIndexOf("."));
     					String dir2=getServletContext().getRealPath("/")+"WEB-INF/courseware/"+filename;
+    					
     					java.io.File file1=new java.io.File(dir1);
+    					if(!file1.exists()) {
+    						String script = "<script>alert('文件已失效');location.href='../mainStudent.jsp'</script>";
+    						response.getWriter().println(script);
+    						return ;
+    					}
     					java.io.File file2=new java.io.File(dir2);
     					
     					FileUtils.copyFile(file1, file2);
