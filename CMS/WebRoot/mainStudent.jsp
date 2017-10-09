@@ -35,8 +35,7 @@ background: linear-gradient(to bottom, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, 
 	<jsp:include page="header.jsp" />
 	<jsp:include page="filterStudent.jsp" />
 
-<form name="stuManage" action="/CMS/servlet/stuManage"
-		enctype="multipart/form-data" method="post">
+<form name="stuManage" action="/CMS/servlet/stuManage" enctype="multipart/form-data" method="post">
 	<div class="container" style="width:850px">
 		<ul id="myTab" class="nav nav-tabs">
 			<li class="active"><a href="#course" data-toggle="tab"><h4>课程</h4></a></li>

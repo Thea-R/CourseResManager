@@ -61,13 +61,29 @@
 						</div>
 						<div class="modal-footer">
 							<script language="javascript">
+							function isChinese(obj) {
+								var reg=/^[\u0391-\uFFE5]+$/; 
+								return reg.test(obj);
+							}
+							function checkZm(zm) {
+								var zmReg=/^[a-zA-Z]*$/; 
+								return zmReg.test(zm);
+							}
+							function checkNumber(obj){ 
+								var reg = /^[0-9]+$/; 
+								return reg.test(obj);
+							}
 							function sMod<%=i%> () {
-								if (admManage.snm<%=i%>.value=="" || admManage.spw<%=i%>.value=="") {
+								if(admManage.snm<%=i%>.value=="" || admManage.spw<%=i%>.value=="") {
 									alert("信息填写不完整，请重新输入");
 									return false;
 								}
-								if (admManage.snm<%=i%>.value.length>20 || admManage.spw<%=i%>.value.length>20) {
+								if(admManage.snm<%=i%>.value.length>20 || admManage.spw<%=i%>.value.length>20) {
 									alert("信息超过20个字符，请重新输入");
+									return false;
+								}
+								if(!(isChinese(admManage.snm<%=i%>.value) || checkZm(admManage.snm<%=i%>.value))) {
+									alert("姓名只能是纯汉字或纯字母，请重新输入");
 									return false;
 								}
 								return true;
@@ -90,11 +106,19 @@
 	<tr>
 		<script language="javascript">
 		function addS () {
-			if (admManage.sid_add.value=="" || admManage.snm_add.value=="" || admManage.spw_add.value=="") {
+			if(!checkNumber(admManage.sid_add.value)) {
+				alert("帐号只能是数字，请重新输入");
+				return false;
+			}
+			if(!(isChinese(admManage.snm_add.value) || checkZm(admManage.snm_add.value))) {
+				alert("姓名只能是纯汉字或纯字母，请重新输入");
+				return false;
+			}
+			if(admManage.sid_add.value=="" || admManage.snm_add.value=="" || admManage.spw_add.value=="") {
 				alert("信息填写不完整，请重新输入");
 				return false;
 			}
-			if (admManage.sid._add.value.length>20 || admManage.snm_add.value.length>20 || admManage.spw_add.value.length>20) {
+			if(admManage.sid._add.value.length>20 || admManage.snm_add.value.length>20 || admManage.spw_add.value.length>20) {
 				alert("信息超过20个字符，请重新输入");
 				return false;
 			}

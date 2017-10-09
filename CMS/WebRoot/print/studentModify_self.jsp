@@ -14,11 +14,11 @@
 <div align="center" style="padding-top: 10px">
 	<br>
 	<div class="input-group">
-        <input type="password" name="old" class="form-control" placeholder="旧密码" required>
+        <input type="password" name="old" class="form-control" placeholder="旧密码">
     </div>
     <br>  
 	<div class="input-group">
-		<input type="password" name="now" class="form-control" placeholder="新密码" required>
+		<input type="password" name="now" class="form-control" placeholder="新密码">
 	</div>
 	<br>
 	

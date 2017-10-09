@@ -53,6 +53,12 @@ public class stuManage extends HttpServlet {
         try {  
             su.upload();
 
+            String test=req.getParameter("test");
+            if(test!=null) {
+            	String script = "<script>alert('正常');location.href='../mainStudent.jsp'</script>";
+        		response.getWriter().println(script);
+            }
+            
             String modify_self=req.getParameter("modify_self");
             if(modify_self!=null) {
             	StudentDao stu=new StudentDao();
@@ -81,6 +87,7 @@ public class stuManage extends HttpServlet {
         			String str1="evalua"+i;
         			String str2="dnc"+i;
         			String str3="eva"+i;
+        			System.out.println(i+"???");
         			if(req.getParameter(str1)!=null) {
         				String eva=req.getParameter(str3), script=new String();
         				
@@ -91,6 +98,7 @@ public class stuManage extends HttpServlet {
         				return ;
         			}
         			else if(req.getParameter(str2)!=null) {
+        				System.out.println(i+"...");
         				CoursewareDao cw=new CoursewareDao();
     					String filename=cw.getbyCourse_no(cno).getFile_title();
     					String dir1=getServletContext().getRealPath("/")+"WEB-INF/courseware/"+cno+filename.substring(filename.lastIndexOf("."));
